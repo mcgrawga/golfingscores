@@ -7,10 +7,23 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<%=
+	if ( user_signed_in? )
+      render "/layouts/navbar_user_logged_in"
+	else
+      render "/layouts/navbar_not_logged_in"
+    end
+%>
 	<p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>
 
-<%= yield %>
-
+	   <!-- Begin page content -->
+    <div class="container">
+      <div class="page-header">
+        <h1>Statgolf.com</h1>
+      </div>
+      <%= yield %>
+    </div>
 </body>
 </html>
