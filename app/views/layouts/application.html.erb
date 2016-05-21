@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Statgolf</title>
+  <title>Statgolf <%= yield :page_title %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -21,7 +21,7 @@
 	   <!-- Begin page content -->
     <div class="container">
       <div class="page-header">
-        <h1>Statgolf.com</h1>
+        <h1><%= yield :page_header %></h1>
       </div>
       <%= yield %>
     </div>

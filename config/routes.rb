@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   root 'staticpages#index'
   get 'about' => 'staticpages#about'
 
-  get 'scores/show' => 'scores#show'
+  get 'scores' => 'scores#show'
 
-  get 'courses/show' => 'courses#show'
+  get 'courses' => 'courses#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

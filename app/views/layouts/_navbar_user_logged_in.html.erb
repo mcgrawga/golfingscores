@@ -12,8 +12,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="<%= 'active' if current_page?(scores_show_path) %>"><%= link_to "Scores", scores_show_path %></li>
-            <li class="<%= 'active' if current_page?(courses_show_path) %>"><%= link_to "Golf Courses", courses_show_path %></li>
+            <li class="<%= 'active' if current_page?(scores_path) %>"><%= link_to "Scores", scores_path %></li>
+            <li class="<%= 'active' if current_page?(courses_path) %>"><%= link_to "Golf Courses", courses_path %></li>
             <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
           </ul>
         </div><!--/.nav-collapse -->
