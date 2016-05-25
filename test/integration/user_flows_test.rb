@@ -2,6 +2,11 @@ require 'test_helper'
 
 
 class UserFlowsTest < ActionDispatch::IntegrationTest
+  test "user can't see scores page unless logged in" do
+    get scores_path
+    assert_redirected_to root_path
+  end
+
   test "user can see scores page after login" do
     get user_session_path
     assert_equal 200, status
@@ -14,6 +19,12 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     assert_select 'h1', "Scores"
   end
 
+
+
+  test "user can't see course page unless logged in" do
+    get courses_path
+    assert_redirected_to root_path
+  end
 
   test "user can see courses page after login" do
     get user_session_path
