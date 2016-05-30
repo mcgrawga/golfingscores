@@ -24,3 +24,10 @@ module Statgolf
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
+
+# Writes to the console log
+def log(message) 
+    puts "**  "
+    puts "**  " + message
+    puts "**  "
+end

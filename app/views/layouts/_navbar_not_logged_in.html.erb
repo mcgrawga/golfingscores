@@ -15,19 +15,21 @@
             <li class="<%= 'active' if current_page?(about_path) %>"><%= link_to "About", about_path %></li>
           </ul>
 
-          <ul class="nav navbar-nav navbar-right">
-            <%= form_for(:user, :url => session_path(:user), html: { class: "navbar-form navbar-right form-inline" }) do |f| %>
-              <div class="form-group">
-                <%= f.email_field :email, {:autofocus => true, :placeholder => "Email", :class => 'form-control'} %> 
-              </div>
-              <div class="form-group">
-                <%= f.password_field :password, {:class => 'form-control', :placeholder => "Password", autocomplete: "off"} %>
-              </div>
-              
-              <%= f.submit 'Login', class: "btn btn-default" %>
+          <% if !current_page?(new_user_registration_path) %>
+            <ul class="nav navbar-nav navbar-right">
+              <%= form_for(:user, :url => session_path(:user), html: { class: "navbar-form navbar-right form-inline" }) do |f| %>
+                <div class="form-group">
+                  <%= f.email_field :email, {:autofocus => true, :placeholder => "Email", :class => 'form-control'} %> 
+                </div>
+                <div class="form-group">
+                  <%= f.password_field :password, {:class => 'form-control', :placeholder => "Password", autocomplete: "off"} %>
+                </div>
+                
+                <%= f.submit 'Login', class: "btn btn-default" %>
 
-            <% end %>
-          </ul>
+              <% end %>
+            </ul>
+          <% end %>
 
 
         </div><!--/.nav-collapse -->

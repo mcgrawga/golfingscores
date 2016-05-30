@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users
+
+  #
+  #  These next two didn't work together.  Was trying to override the devise registrations controller.
+  #  The only thing I could get to work was the third uncommented line.
+  #
+  #devise_for :users, controllers: { registrations: 'users/registrations' }
+  #devise_for :users, :skip => [:registrations ]
+  devise_for :users, controllers: { sessions: "devise/sessions", passwords: "devise/passwords", registrations: "users/registrations" }
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
