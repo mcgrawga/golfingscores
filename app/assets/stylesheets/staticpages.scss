@@ -6,3 +6,74 @@
 	margin-top: 50px;
 	margin-bottom: 25px;
 }
+
+#plans {
+	margin-top: 25px;
+	margin-right: 25px;
+	margin-bottom: 25px;
+}
+
+.plan{
+	float: left;
+}
+
+
+.plan_header {
+	background-color: lightblue;
+	width: 250px;
+	height: 75px;
+	border-style: solid solid none;
+	border-width: 2px;
+	border-color: gray;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	text-align: center;
+}
+
+
+.plan_content {
+	width: 250px;
+	height: 400px;
+	border-style: none solid solid solid;
+	border-width: 2px;
+	border-color: gray;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	text-align: center;
+}
+
+
+.plan_header > h3 {
+	color: white;
+}
+
+.plan_content > .plan_price {
+	font-size: 5em;
+}
+
+#Statgolf_Duffer_Plan {
+	margin-right: 25px;
+}
+
+#Statgolf_Amateur_Plan {
+	margin-left: 25px;
+	margin-right: 25px;
+}
+
+#Statgolf_Professional_Plan {
+	margin-left: 25px;
+}
+
+.per_year {
+	font-size: 1.5em;
+	color: gray;
+}
+
+.third_line {
+	font-size: 1.75em;
+}
+
+.fourth_line {
+	font-size: 1.75em;
+}
+

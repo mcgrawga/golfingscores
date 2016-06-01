@@ -5,6 +5,6 @@ class CoursesControllerTest < ActionController::TestCase
 		sign_in users(:user1)
 		get :show
 		assert_response :success
-		assert_select 'title', "Statgolf Courses"
+		assert_select 'title', "Statgolf Golf Courses"
 	end
 end

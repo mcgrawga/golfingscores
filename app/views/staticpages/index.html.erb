@@ -4,5 +4,49 @@
 <h3>Know your handicap.</h3>
 <h3>Record putts, fairways, penalties, greens in regualtion, ...</h3>
 <h3>Get cool graphs to improve your game.</h3>
-<h3>$10.99 per year.</h3>
-<a class="btn btn-primary btn-lg" id="sign_up_button" href="/users/sign_up" role="button" >Sign up now cuz you're awesome!</a> 
+<h3>Starting at $4.99 per year.</h3>
+
+<div id="plans">
+	<div class="plan" id="Statgolf_Duffer_Plan">
+		<div class="plan_header">
+			<h3>Duffer</h3>
+		</div>
+		<div class="plan_content">
+			<div class="plan_price">$4.99</div>
+			<div class="per_year">per year</div>
+			<div class="third_line">Unlimited Scores</div>
+			<div class="fourth_line">Your Handicap</div>
+			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Statgolf Duffer"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+		</div>
+	</div>
+	<div class="plan" id="Statgolf_Amateur_Plan">
+		<div class="plan_header">
+			<h3>Amateur</h3>
+		</div>
+		<div class="plan_content">
+			<div class="plan_price">$8.99</div>
+			<div class="per_year">per year</div>
+			<div class="third_line">Duffer +</div>
+			<div class="fourth_line">Putts per green</div>
+			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Statgolf Amateur"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+		</div>
+	</div>
+	<div class="plan" id="Statgolf_Professional_Plan">
+		<div class="plan_header">
+			<h3>Professional</h3>
+		</div>
+		<div class="plan_content">
+			<div class="plan_price">$12.99</div>
+			<div class="per_year">per year</div>
+			<div class="third_line">Amateur +</div>
+			<div class="fourth_line">Penalties, Fairways, Greens in Regulation</div>
+			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Statgolf Professional"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+		</div>
+	</div>
+	<br style="clear: left;" />
+</div>
+
+
+
+
+

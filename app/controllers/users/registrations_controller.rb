@@ -3,29 +3,37 @@ class Users::RegistrationsController < Devise::RegistrationsController
 # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+   def new
+      log("In new action of Devise::RegistrationsController")
+      log("Plan name:  " + params[:plan_name])
+      @plan_name = params[:plan_name]
+      super
+   end
 
   # POST /resource
   def create
     log("In create action of Devise::RegistrationsController")
     super
+    log(resource.email)
     if resource.save
       log("Resource saved successfully")
-      log("Creating customer and subscription")
+      log("Creating stripe subscription for plan " + params[:plan_name])
       token = params[:stripeToken]
       begin
         # Create a Customer and a subsctiption
         Stripe.api_key = ENV['SECRET_KEY']
         customer = Stripe::Customer.create(
           :source => params[:stripeToken],
-          :plan => "Statgolf Duffe",
+          :plan => params[:plan_name],
           :email => resource.email
         )
-        log("Created customer and subscription, customer id:  " + customer.id)
+        # Add stripe token to customer in database
+        resource.stripe_customer_id = customer.id
+        resource.stripe_plan = params[:plan_name]
+        resource.save
+        log("Created customer and added stripe customer id and plan name to database:  " + customer.id + ", " + params[:plan_name])
       rescue => e
-        log("Some other error:  " + e.message)
+        log("Error:  " + e.message)
         log("Destroying the user that was created because the payment didn't succeed")
         resource.destroy
       end
