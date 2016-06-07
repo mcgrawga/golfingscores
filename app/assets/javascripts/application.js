@@ -21,14 +21,20 @@ ready = function() {
 
 
 	$('#new_user').submit(function(event) {
-		// Disable the submit button to prevent repeated clicks:
-		$(this).find('.submit').prop('disabled', true);
+		// Devise names the forms for different things the same name.
+		// We only want to do this when creating a new user, not recovering a password
+		// or something else.
+		if (window.location.pathname == 'users/sign_up')
+		{
+			// Disable the submit button to prevent repeated clicks:
+			$(this).find('.submit').prop('disabled', true);
 
-		// Request a token from Stripe:
-		Stripe.card.createToken($(this), stripeResponseHandler);
+			// Request a token from Stripe:
+			Stripe.card.createToken($(this), stripeResponseHandler);
 
-		// Prevent the form from being submitted:
-		return false;
+			// Prevent the form from being submitted:
+			return false;
+		}
 	});
 
 	function stripeResponseHandler(status, response) {
