@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   get 'courses' => 'courses#show'
 
+  get 'settings' => 'settings#show'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
