@@ -15,8 +15,8 @@ Rails.application.configure do
   domain: "statgolf.herokuapp.com",
   authentication: "plain",
   enable_starttls_auto: true,
-  user_name: "support@statgolf.com",
-  password: "Blu1duck*"
+  user_name: ENV['STATGOLF_SUPPORT_EMAIL'],
+  password: ENV['STATGOLF_SUPPORT_EMAIL_PASSWORD']
 }
 
   # Code is not reloaded between requests.
