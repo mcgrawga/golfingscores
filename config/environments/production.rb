@@ -15,8 +15,8 @@ Rails.application.configure do
   domain: "statgolf.com",
   authentication: "plain",
   enable_starttls_auto: true,
-  user_name: "garthmcgraw@statgolf.com",
-  password: "Sher1lock*"
+  user_name: "support@statgolf.com",
+  password: "Blu1duck*"
 }
 
   # Code is not reloaded between requests.
