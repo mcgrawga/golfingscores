@@ -1,3 +1,14 @@
 <%content_for :page_title do%>Settings<%end%>
 <%content_for :page_header do%>Settings<%end%>
-Show these settings Bitches!
+
+<div class="Settings_Page_Link">
+	<%= link_to "Change your username or password", edit_user_registration_path %>
+</div>
+
+<div class="Settings_Page_Link">
+	<%= link_to "Change your subscription", settings_change_subscription_path %>
+</div>
+
+<div class="Settings_Page_Link">
+	<%= link_to "Cancel your subscription", settings_cancel_subscription_path %>
+</div>

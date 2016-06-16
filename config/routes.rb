@@ -20,6 +20,11 @@ Rails.application.routes.draw do
   get 'courses' => 'courses#show'
 
   get 'settings' => 'settings#show'
+  get 'settings/change_subscription' => 'settings#change_subscription'
+  post 'settings/change_subscription' => 'settings#do_change_subscription'
+  get 'settings/cancel_subscription' => 'settings#cancel_subscription'
+  post 'settings/cancel_subscription' => 'settings#do_cancel_subscription'
+  
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -30,9 +30,6 @@ class UsersRegistrationsControllerTest < ActionController::TestCase
 		  },
 		)
 
-		log(token.id)
-		#post :create, 'plan_name' => 'Statgolf Duffer', 'user[email]' => 'somethings@gmail.com', 
-		#				'user[password]' =>  'password', 'user[password_confirmation]' =>  'password', 'stripeToken' => token.id
 		post :create, :user => { :email => 'something@gmail.com', :password =>  'password', :password_confirmation =>  'password' },
 						:stripeToken => token.id, :plan_name => 'Statgolf Duffer'
 

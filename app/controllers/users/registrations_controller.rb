@@ -4,20 +4,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
    def new
-      log("In new action of Devise::RegistrationsController")
-      log("Plan name:  " + params[:plan_name])
       @plan_name = params[:plan_name]
       super
    end
 
   # POST /resource
   def create
-    log("In create action of Devise::RegistrationsController")
     super
-    log(resource.email)
     if resource.save
-      log("Resource saved successfully")
-      log("Creating stripe subscription for plan " + params[:plan_name])
       token = params[:stripeToken]
       begin
         # Create a Customer and a subsctiption
@@ -31,15 +25,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
         resource.stripe_customer_id = customer.id
         resource.stripe_plan = params[:plan_name]
         resource.save
-        log("Created customer and added stripe customer id and plan name to database:  " + customer.id + ", " + params[:plan_name])
       rescue => e
-        log("Error:  " + e.message)
-        log("Destroying the user that was created because the payment didn't succeed")
         resource.destroy
       end
-      
-    else
-      log("Resourse not saved")
     end
   end
 
