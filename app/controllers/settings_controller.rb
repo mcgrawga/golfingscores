@@ -1,5 +1,6 @@
 class SettingsController < ApplicationController
 	before_filter :check_for_login
+	before_filter :check_for_subscription, :except => :renew_subscription
 
 	def show
 	end
@@ -16,5 +17,8 @@ class SettingsController < ApplicationController
 
 	def do_cancel_subscription
 		render :cancel_subscription_confirm
+	end
+
+	def renew_subscription
 	end
 end

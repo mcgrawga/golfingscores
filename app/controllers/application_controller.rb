@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   def check_for_login
 	redirect_to root_path unless user_signed_in?
    end
+
+   def check_for_subscription
+   	redirect_to settings_renew_subscription_path if current_user.stripe_customer_id.nil?
+   end
 end

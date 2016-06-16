@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   post 'settings/change_subscription' => 'settings#do_change_subscription'
   get 'settings/cancel_subscription' => 'settings#cancel_subscription'
   post 'settings/cancel_subscription' => 'settings#do_cancel_subscription'
+  get 'settings/renew_subscription' => 'settings#renew_subscription'
   
 
   # Example of regular route:
