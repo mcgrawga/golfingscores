@@ -12,10 +12,12 @@
 			<h3>Duffer</h3>
 		</div>
 		<div class="plan_content">
-			<div class="plan_price">$4.99</div>
-			<div class="per_year">per year</div>
-			<div class="third_line">Unlimited Scores</div>
-			<div class="fourth_line">Your Handicap</div>
+			<div class="plan_details">
+				<div class="plan_price">$4.99</div>
+				<div class="per_year">per year</div>
+				<div class="third_line">Unlimited Scores</div>
+				<div class="fourth_line">Your Handicap</div>
+			</div>
 			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Statgolf Duffer"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
 		</div>
 	</div>
@@ -24,10 +26,12 @@
 			<h3>Amateur</h3>
 		</div>
 		<div class="plan_content">
-			<div class="plan_price">$8.99</div>
-			<div class="per_year">per year</div>
-			<div class="third_line">Duffer +</div>
-			<div class="fourth_line">Putts per green</div>
+			<div class="plan_details">
+				<div class="plan_price">$8.99</div>
+				<div class="per_year">per year</div>
+				<div class="third_line">Duffer +</div>
+				<div class="fourth_line">Putts per green</div>
+			</div>
 			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Statgolf Amateur"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
 		</div>
 	</div>
@@ -36,10 +40,12 @@
 			<h3>Professional</h3>
 		</div>
 		<div class="plan_content">
-			<div class="plan_price">$12.99</div>
-			<div class="per_year">per year</div>
-			<div class="third_line">Amateur +</div>
-			<div class="fourth_line">Penalties, Fairways, Greens in Regulation</div>
+			<div class="plan_details">
+				<div class="plan_price">$12.99</div>
+				<div class="per_year">per year</div>
+				<div class="third_line">Amateur +</div>
+				<div class="fourth_line">Penalties, Fairways, Greens in Regulation</div>
+			</div>
 			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Statgolf Professional"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
 		</div>
 	</div>

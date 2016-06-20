@@ -1,5 +1,66 @@
 <%content_for :page_title do%>Change Subscription<%end%>
 <%content_for :page_header do%>Change Subscription<%end%>
 
-<p>Let's change your subscription!</p>
-<%= button_to "Change My Suscription", settings_change_subscription_path, class: "btn btn-primary btn-lg"%>
+<div id="plans">
+	<div class="plan" id="Statgolf_Duffer_Plan">
+		<div class="plan_header">
+			<h3>Duffer</h3>
+		</div>
+		<div class="plan_content">
+			<div class="plan_details">
+				<div class="plan_price">$4.99</div>
+				<div class="per_year">per year</div>
+				<div class="third_line">Unlimited Scores</div>
+				<div class="fourth_line">Your Handicap</div>
+			</div>
+			<% if @current_stripe_plan == 'Statgolf Duffer' %>
+				<div class="current_plan">This is your current plan</div>
+			<% elsif @current_stripe_plan == 'Statgolf Amateur' %>
+				<%= button_to "Downgrade to Duffer", settings_change_subscription_path(:plan_name => "Statgolf Duffer"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+			<% elsif @current_stripe_plan == 'Statgolf Professional' %>
+				<%= button_to "Downgrade to Duffer", settings_change_subscription_path(:plan_name => "Statgolf Duffer"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+			<% end %>
+		</div>
+	</div>
+	<div class="plan" id="Statgolf_Amateur_Plan">
+		<div class="plan_header">
+			<h3>Amateur</h3>
+		</div>
+		<div class="plan_content">
+			<div class="plan_details">
+				<div class="plan_price">$8.99</div>
+				<div class="per_year">per year</div>
+				<div class="third_line">Duffer +</div>
+				<div class="fourth_line">Putts per green</div>
+			</div>
+			<% if @current_stripe_plan == 'Statgolf Duffer' %>
+				<%= button_to "Upgrade to Amateur", settings_change_subscription_path(:plan_name => "Statgolf Amateur"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+			<% elsif @current_stripe_plan == 'Statgolf Amateur' %>
+				<div class="current_plan">This is your current plan</div>
+			<% elsif @current_stripe_plan == 'Statgolf Professional' %>
+				<%= button_to "Downgrade to Amateur", settings_change_subscription_path(:plan_name => "Statgolf Amateur"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+			<% end %>
+		</div>
+	</div>
+	<div class="plan" id="Statgolf_Professional_Plan">
+		<div class="plan_header">
+			<h3>Professional</h3>
+		</div>
+		<div class="plan_content">
+			<div class="plan_details">
+				<div class="plan_price">$12.99</div>
+				<div class="per_year">per year</div>
+				<div class="third_line">Amateur +</div>
+				<div class="fourth_line">Penalties, Fairways, Greens in Regulation</div>
+			</div>
+			<% if @current_stripe_plan == 'Statgolf Duffer' %>
+				<%= button_to "Upgrade to Professional", settings_change_subscription_path(:plan_name => "Statgolf Professional"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+			<% elsif @current_stripe_plan == 'Statgolf Amateur' %>
+				<%= button_to "Upgrade to Professional", settings_change_subscription_path(:plan_name => "Statgolf Professional"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+			<% elsif @current_stripe_plan == 'Statgolf Professional' %>
+				<div class="current_plan">This is your current plan</div>
+			<% end %>	
+		</div>
+	</div>
+	<br style="clear: left;" />
+</div>

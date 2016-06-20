@@ -21,11 +21,14 @@ ready = function() {
 
 
 	$('#new_user').submit(function(event) {
+		alert('yo');
 		// Devise names the forms for different things the same name.
 		// We only want to do this when creating a new user, not recovering a password
 		// or something else.
-		if (window.location.pathname == 'users/sign_up')
+		alert(window.location.pathname);
+		if (window.location.pathname == '/users/sign_up' || window.location.pathname == '/settings/renew_subscription')
 		{
+			alert('yo');
 			// Disable the submit button to prevent repeated clicks:
 			$(this).find('.submit').prop('disabled', true);
 

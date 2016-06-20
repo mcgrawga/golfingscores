@@ -2,7 +2,16 @@
 <%content_for :page_header do%>Renew Your Subscription<%end%>
 
 <p>
-	Looks like you dropped your subscription.  We haven't lost any of your golf scores.  Give us a try again.
+	Looks like you dropped your subscription.  We haven't lost any of your golf scores.  Resubscribe and give us a try again.
+	After you sign back up you can change to a different subscription plan if you like.
 </p>
 
-<%= button_to "Renew Subscription", settings_renew_subscription_path, class: "btn btn-primary btn-lg"%>
+<%= form_for(settings_renew_subscription_path, html: { id: "new_user" }) do |f| %>
+  <span class="payment-errors"></span>
+
+  <%= render "partials/stripe_cc_fields" %>
+
+  <div class="actions">
+    <%= f.submit "Renew Subscription", class: "btn btn-primary btn-lg submit"  %>
+  </div>
+<% end %>

@@ -31,6 +31,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def resubscribe
+  end
+
+  def do_resubscribe
+    render :resubscribe_confirm
+  end
+
   # GET /resource/edit
   # def edit
   #   super
