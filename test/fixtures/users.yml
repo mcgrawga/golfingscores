@@ -7,4 +7,5 @@
 
 user1:
  email: user1@statgolf.com
+ stripe_customer_id: fake_stripe_customer_id
  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>

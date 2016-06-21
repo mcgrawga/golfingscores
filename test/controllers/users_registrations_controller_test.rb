@@ -19,7 +19,7 @@ class UsersRegistrationsControllerTest < ActionController::TestCase
 
 	test "Should register a new user and save stripe customer id" do
   		@request.env["devise.mapping"] = Devise.mappings[:user]
-		Stripe.api_key = "sk_test_qs7hlVrey8QcgqkOUbMFgdAK"
+		Stripe.api_key = ENV['SECRET_KEY']
 
 		token = Stripe::Token.create(
 		  :card => {
