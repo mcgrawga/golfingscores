@@ -138,7 +138,6 @@ ready = function() {
 				    url: "/scores/get_tee/" + teeId,
 				    dataType: "json",
 				    success: function(data){
-				    	alert(data.par_hole_1);
 				    	for (i=1; i<19; i++)
 				    		$("#par_hole_" + i).html(data["par_hole_" + i]);
 				    }        
