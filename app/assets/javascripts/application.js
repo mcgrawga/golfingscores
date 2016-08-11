@@ -85,6 +85,68 @@ ready = function() {
 		console.log("Next Hole:  " + nextHole);
 	});
 
+
+	//
+	//  On the new score page, populate the tees dropdown after a course is picked.
+	//
+	$("#course_select_box").change(function(){
+		var courseId = $(this).find(":selected").attr("value");
+		if (courseId.length > 0)
+		{
+			$('#tee_select_box').empty();
+			$('#tee_select_box').append('<option value="">Select a tee</option>');
+			if (courseId == "Add a course")
+				window.location.href = "/courses/new";
+			else
+			{
+				$.ajax({
+				    type: "GET",
+				    url: "/scores/get_tees_for_course/" + courseId,
+				    dataType: "json",
+				    success: function(data){
+				    	if (data.length > 0)
+				    	{
+					        for (i = 0; i < data.length; i++)
+					        	$('#tee_select_box').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+				        }
+				        $('#tee_select_box').append('<option value="Add a tee">...Add a tee</option>');
+				    }        
+				});
+			}
+		}
+	})
+
+
+
+	//
+	//  On the new score page, populate the par values on the scorecard after a tee is picked.
+	//
+	$("#tee_select_box").change(function(){
+		var teeId = $(this).find(":selected").attr("value");
+		if (teeId.length > 0)
+		{
+			console.log(teeId);
+			if (teeId == "Add a tee")
+			{
+				var courseId = $("#course_select_box").find(":selected").attr("value");
+				window.location.href = "/courses/" + courseId + "/tees/new";
+			}
+			else
+			{
+				$.ajax({
+				    type: "GET",
+				    url: "/scores/get_tee/" + teeId,
+				    dataType: "json",
+				    success: function(data){
+				    	alert(data.par_hole_1);
+				    	for (i=1; i<19; i++)
+				    		$("#par_hole_" + i).html(data["par_hole_" + i]);
+				    }        
+				});
+			}
+		}
+	})
+
 };
 
 $(document).ready(ready);

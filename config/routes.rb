@@ -15,13 +15,17 @@ Rails.application.routes.draw do
   root 'staticpages#index'
   get 'about' => 'staticpages#about'
 
-  get 'scores' => 'scores#show'
+  #get 'scores' => 'scores#index'
+  #get 'scores/new' => 'scores#new'
 
   #get 'courses' => 'courses#show'
   #get 'courses/new' => 'courses#new'
   #post 'courses' => 'courses#create'
   #patch 'course' => 'courses#update'
   #get 'courses/edit/:id' => 'courses#edit'
+  resources :scores
+  get 'scores/get_tees_for_course/:id' => 'scores#get_tees_for_course'
+  get 'scores/get_tee/:id' => 'scores#get_tee'
   resources :courses do
     resources :tees
   end

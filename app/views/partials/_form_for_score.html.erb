@@ -1,0 +1,181 @@
+<%= form_for @score do |f| %>
+	<div class="errors">
+		<ul>
+			<% @score.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<%end%>
+		<ul>
+	</div>
+
+
+	<div class="form-group">
+		<select class="form-control" id="course_select_box">
+			<option value="">Select a course</option>
+			<% @courses.each do |course| %>
+				<option value="<%= course.id %>"><%= course.name %></option>
+			<% end %>
+			<option value="Add a course">...Add a course</option>
+		</select>
+	</div>
+
+	<div class="form-group">
+		<select class="form-control" id="tee_select_box">
+		</select>
+	</div>
+
+
+	<table class="table-condensed">
+		<tr>
+			<td class="scorecard_label">Hole</td>
+			<td class="center_content scorecard_label">1</td>
+			<td class="center_content scorecard_label">2</td>
+			<td class="center_content scorecard_label">3</td>
+			<td class="center_content scorecard_label">4</td>
+			<td class="center_content scorecard_label">5</td>
+			<td class="center_content scorecard_label">6</td>
+			<td class="center_content scorecard_label">7</td>
+			<td class="center_content scorecard_label">8</td>
+			<td class="center_content scorecard_label">9</td>
+		<tr>
+		<tr>
+			<td class="scorecard_label">Par</td>
+			<td id="par_hole_1" class="center_content scorecard_label"></td>
+			<td id="par_hole_2" class="center_content scorecard_label"></td>
+			<td id="par_hole_3" class="center_content scorecard_label"></td>
+			<td id="par_hole_4" class="center_content scorecard_label"></td>
+			<td id="par_hole_5" class="center_content scorecard_label"></td>
+			<td id="par_hole_6" class="center_content scorecard_label"></td>
+			<td id="par_hole_7" class="center_content scorecard_label"></td>
+			<td id="par_hole_8" class="center_content scorecard_label"></td>
+			<td id="par_hole_9" class="center_content scorecard_label"></td>
+		<tr>
+		<tr>
+			<td class="scorecard_label">Score</td>
+			<td>
+				<div class="form-group" style="vertical-align: middle;">
+					<%= f.text_field :score_hole_1, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_2, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_3, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_4, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_5, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_6, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_7, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_8, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_9, :class => 'form-control' %>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="scorecard_label">Hole</td>
+			<td class="center_content scorecard_label">10</td>
+			<td class="center_content scorecard_label">11</td>
+			<td class="center_content scorecard_label">12</td>
+			<td class="center_content scorecard_label">13</td>
+			<td class="center_content scorecard_label">14</td>
+			<td class="center_content scorecard_label">15</td>
+			<td class="center_content scorecard_label">16</td>
+			<td class="center_content scorecard_label">17</td>
+			<td class="center_content scorecard_label">18</td>
+		<tr>
+		<tr>
+			<td class="scorecard_label">Par</td>
+			<td id="par_hole_10" class="center_content scorecard_label"></td>
+			<td id="par_hole_11" class="center_content scorecard_label"></td>
+			<td id="par_hole_12" class="center_content scorecard_label"></td>
+			<td id="par_hole_13" class="center_content scorecard_label"></td>
+			<td id="par_hole_14" class="center_content scorecard_label"></td>
+			<td id="par_hole_15" class="center_content scorecard_label"></td>
+			<td id="par_hole_16" class="center_content scorecard_label"></td>
+			<td id="par_hole_17" class="center_content scorecard_label"></td>
+			<td id="par_hole_18" class="center_content scorecard_label"></td>
+		<tr>
+		<tr>
+			<td class="scorecard_label">Score</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_10, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_11, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_12, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_13, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_14, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_15, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_16, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_17, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :score_hole_18, :class => 'form-control' %>
+				</div>
+			</td>
+		</tr>
+
+	</table>
+	
+	
+	<%= f.submit class: "btn btn-primary"%>
+	<% if !@score.id.blank? %>
+		<%= link_to 'Delete Score', score_path(@course), method: :delete, class: "delete_score_link" %>
+	<% end %>
+<% end %>
