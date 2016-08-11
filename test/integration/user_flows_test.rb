@@ -82,7 +82,7 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     assert_not_equal original_email, new_email
   end
 
-    test "Should register a new user, upgrade their plan, cancel their subscription plan then renew their plan" do 
+  test "Should register a new user, upgrade their plan, cancel their subscription plan then renew their plan" do 
     #
     #  Register new user
     #

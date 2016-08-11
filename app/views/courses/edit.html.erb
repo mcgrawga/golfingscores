@@ -1,0 +1,22 @@
+<%content_for :page_title do%>Edit Course<%end%>
+<%content_for :page_header do%><%= @course.name.titleize %><%end%>
+
+
+<%= render "partials/form_for_course" %>
+
+
+<div id="Tee_Display_Section">
+	<h3>Tees <%= link_to 'Add Tee', new_course_tee_path(@course), class: "btn", style: "float: right;" %></h3>
+	
+	<ul class="list-group">
+		<% if @course.tees.count > 0 %>
+			<% @course.tees.each do |tee| %>
+				<%= link_to tee.name.titleize, edit_course_tee_path(@course.id, tee.id), class: "list-group-item" %>
+			<% end %>
+		<% else %>
+			<li class="list-group-item">No tees have been created for <%= @course.name.titleize %></li>
+		<% end %>
+	</ul>
+</div>
+
+

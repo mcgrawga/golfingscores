@@ -1,3 +1,15 @@
 // Place all the styles related to the courses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.add_course_link {
+	float: right;
+}
+
+.delete_course_link {
+	float: right;
+}
+
+.clear_float{
+	clear: both;
+}
+

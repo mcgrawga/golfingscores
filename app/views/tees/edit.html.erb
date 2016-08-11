@@ -1,0 +1,4 @@
+<%content_for :page_title do%>Edit Tee<%end%>
+<%content_for :page_header do%>Edit <%= @tee.course.name.titleize + " " + @tee.name.titleize %> <%end%>
+
+<%= render "partials/form_for_tee" %>

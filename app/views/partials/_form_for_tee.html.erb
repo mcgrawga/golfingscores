@@ -1,0 +1,153 @@
+<%= form_for [@course, @tee] do |f| %>
+	<div class="errors">
+		<ul>
+			<% @tee.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<%end%>
+		<ul>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :name, 'Tee name'%>
+		<%= f.text_field :name, {:autofocus => true,:class => 'form-control'} %>
+	</div>
+	<div class="form-group">
+		<%= f.label :course_rating %>
+		<%= f.text_field :course_rating, :class => 'form-control' %>
+	</div>
+	<div class="form-group">
+		<%= f.label :slope_rating %>
+		<%= f.text_field :slope_rating, :class => 'form-control' %>
+	</div>
+
+	<table class="table-condensed">
+		<tr>
+			<td class="scorecard_label">Hole</td>
+			<td class="center_content scorecard_label">1</td>
+			<td class="center_content scorecard_label">2</td>
+			<td class="center_content scorecard_label">3</td>
+			<td class="center_content scorecard_label">4</td>
+			<td class="center_content scorecard_label">5</td>
+			<td class="center_content scorecard_label">6</td>
+			<td class="center_content scorecard_label">7</td>
+			<td class="center_content scorecard_label">8</td>
+			<td class="center_content scorecard_label">9</td>
+		<tr>
+		<tr>
+			<td class="scorecard_label">Par</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_1, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_2, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_3, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_4, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_5, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_6, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_7, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_8, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_9, :class => 'form-control' %>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="scorecard_label">Hole</td>
+			<td class="center_content scorecard_label">10</td>
+			<td class="center_content scorecard_label">11</td>
+			<td class="center_content scorecard_label">12</td>
+			<td class="center_content scorecard_label">13</td>
+			<td class="center_content scorecard_label">14</td>
+			<td class="center_content scorecard_label">15</td>
+			<td class="center_content scorecard_label">16</td>
+			<td class="center_content scorecard_label">17</td>
+			<td class="center_content scorecard_label">18</td>
+		<tr>
+		<tr>
+			<td class="scorecard_label">Par</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_10, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_11, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_12, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_13, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_14, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_15, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_16, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_17, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :par_hole_18, :class => 'form-control' %>
+				</div>
+			</td>
+		</tr>
+
+	</table>
+
+
+	<%= f.submit class: "btn btn-primary", id: "create_tee_button"%>
+	<% if !@tee.id.blank? %>
+		<%= link_to 'Delete Tee', course_tee_path(@course.id, @tee.id), method: :delete, class: "delete_course_link" %>
+	<% end %>
+<% end %>

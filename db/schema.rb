@@ -11,10 +11,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160601125329) do
+ActiveRecord::Schema.define(version: 20160714005505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "courses", force: :cascade do |t|
+    t.string   "name",       default: "", null: false
+    t.string   "city",       default: "", null: false
+    t.string   "state",      default: "", null: false
+    t.integer  "user_id",                 null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "tees", force: :cascade do |t|
+    t.string   "name",          default: "", null: false
+    t.decimal  "course_rating",              null: false
+    t.integer  "slope_rating",               null: false
+    t.integer  "course_id",                  null: false
+    t.integer  "par_hole_1",                 null: false
+    t.integer  "par_hole_2",                 null: false
+    t.integer  "par_hole_3",                 null: false
+    t.integer  "par_hole_4",                 null: false
+    t.integer  "par_hole_5",                 null: false
+    t.integer  "par_hole_6",                 null: false
+    t.integer  "par_hole_7",                 null: false
+    t.integer  "par_hole_8",                 null: false
+    t.integer  "par_hole_9",                 null: false
+    t.integer  "par_hole_10"
+    t.integer  "par_hole_11"
+    t.integer  "par_hole_12"
+    t.integer  "par_hole_13"
+    t.integer  "par_hole_14"
+    t.integer  "par_hole_15"
+    t.integer  "par_hole_16"
+    t.integer  "par_hole_17"
+    t.integer  "par_hole_18"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

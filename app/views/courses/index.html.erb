@@ -1,0 +1,10 @@
+<%content_for :page_title do%>Golf Courses<%end%>
+<%content_for :page_header do%>Golf Courses<%end%>
+
+<%= link_to 'Add a Course', new_course_path, class: "add_course_link" %>
+<div class="clear_float"></div>
+<div class="list-group">
+	<% @courses.each do |course| %>
+		<%= link_to course.name.titleize, edit_course_path(course.id), class: "list-group-item" %>
+	<% end %>
+</div>

@@ -60,6 +60,31 @@ ready = function() {
 		}
 	};
 
+	//
+	//	Move the cursor to the next tee input box if user enters a 3,4,5.
+	//  Blank and clear the input if user enters anything other than 3,4,5.
+	//  This is only for entering or updating tees, not scores.
+	//
+	$("[id^=tee_par_hole_]").keyup(function(){
+		var inputId = $(this).attr("id");
+		var holeNum = 0;
+		if (inputId.length == 14)
+			holeNum = inputId.slice(-1);
+		else
+			holeNum = inputId.slice(-2);;
+		var nextHole = parseFloat(holeNum) + 1;
+		var parValue = $(this).val();
+		if( parValue >= 3 && parValue <= 5)
+			if (nextHole < 19)
+				$("#tee_par_hole_" + nextHole).focus();
+			else
+				$("#create_tee_button").focus();
+		else
+			$(this).val('');
+
+		console.log("Next Hole:  " + nextHole);
+	});
+
 };
 
 $(document).ready(ready);

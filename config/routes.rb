@@ -17,7 +17,14 @@ Rails.application.routes.draw do
 
   get 'scores' => 'scores#show'
 
-  get 'courses' => 'courses#show'
+  #get 'courses' => 'courses#show'
+  #get 'courses/new' => 'courses#new'
+  #post 'courses' => 'courses#create'
+  #patch 'course' => 'courses#update'
+  #get 'courses/edit/:id' => 'courses#edit'
+  resources :courses do
+    resources :tees
+  end
 
   get 'settings' => 'settings#show'
   get 'settings/change_subscription' => 'settings#change_subscription'

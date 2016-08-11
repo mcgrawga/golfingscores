@@ -1,0 +1,108 @@
+<%= form_for @course do |f| %>
+	<div class="errors">
+		<ul>
+			<% @course.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<%end%>
+		<ul>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :name %>
+		<%= f.text_field :name, {:autofocus => true,:class => 'form-control'} %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :city %>
+		<%= f.text_field :city, :class => 'form-control' %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :state %>
+		<%= f.select :state, [ 
+			'Alberta',
+			'Alabama',
+			'Alaska',
+			'American Samoa',
+			'Arizona',
+			'Arkansas',
+			'Armed Forces Pacific',
+			'British Columbia',
+			'California',
+			'Colorado',
+			'Connecticut',
+			'Delaware',
+			'District of Columbia',
+			'Federated States of Micronesia',
+			'Florida',
+			'Georgia',
+			'Guam',
+			'Hawaii',
+			'Idaho',
+			'Illinois',
+			'Indiana',
+			'Iowa',
+			'Kansas',
+			'Kentucky',
+			'Louisiana',
+			'Maine',
+			'Manitoba',
+			'Marshall Islands',
+			'Maryland',
+			'Massachusetts',
+			'Michigan',
+			'Minnesota',
+			'Mississippi',
+			'Missouri',
+			'Montana',
+			'Nebraska',
+			'Nevada',
+			'New Brunswick',
+			'New Hampshire',
+			'New Jersey',
+			'New Mexico',
+			'New York',
+			'Newfoundland',
+			'North Carolina',
+			'North Dakota',
+			'Northern Mariana Islands',
+			'Northwest Territories',
+			'Nova Scotia',
+			'Nunavut',
+			'Ohio',
+			'Oklahoma',
+			'Ontario',
+			'Oregon',
+			'Palau',
+			'Pennsylvania',
+			'Prince Edward Island',
+			'Puerto Rico',
+			'Quebec',
+			'Rhode Island',
+			'Saskatchewan',
+			'South Carolina',
+			'South Dakota',
+			'Tennessee',
+			'Texas',
+			'Utah',
+			'Vermont',
+			'Virgin Islands',
+			'Virginia',
+			'Washington',
+			'West Virginia',
+			'Wisconsin',
+			'Wyoming',
+			'Yukon Territory'
+			], {:prompt => 'Select One'},  {class: 'form-control'} %>
+	</div>
+
+	
+
+
+
+
+  		<%= f.submit class: "btn btn-primary"%>
+  		<% if !@course.id.blank? %>
+  			<%= link_to 'Delete Course', course_path(@course), method: :delete, class: "delete_course_link" %>
+  		<% end %>
+<% end %>
