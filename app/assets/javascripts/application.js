@@ -81,20 +81,78 @@ ready = function() {
 				$("#create_tee_button").focus();
 		else
 			$(this).val('');
-
-		console.log("Next Hole:  " + nextHole);
 	});
 
 
+
 	//
-	//  On the new score page, populate the tees dropdown after a course is picked.
+	//	Move the cursor to the next score input box if user enters an appropriate score (2, 3, 4, 5).
+	//  If they enter a 1, do nothing.  Might be a hole in one, might be entering a 10.
+	//  If they enter 6, 7, 8, 9, check their course handicap and adjust for equitable stroke control if necessary (esc)
+	//  9 or less:     Double bogey
+	//  10-19:         7
+	//  20-29:         8
+	//  30-39:         9
+	//  40 and above:  10
+	//  If they enter a 10-19, adjust for esc.
+	//
+
+
+	$("[id^=score_score_hole_]").keypress(function(e){
+		var inputId = $(this).attr("id");
+		var holeNum = 0;
+		if (inputId.length == 18)
+			holeNum = inputId.slice(-1);
+		else
+			holeNum = inputId.slice(-2);
+		var par = $("#par_hole_" + holeNum).html();
+		var courseHandicap = 9;
+		var nextHole = parseFloat(holeNum) + 1;
+		var input = String.fromCharCode(e.which)
+		if (isNaN(input))
+		{
+			e.preventDefault();
+			return;
+		}
+		var score = $(this).val() + input;
+		if (score == 1)
+			return;
+		var escScore = GetESCScore(courseHandicap, par);
+		if (score > escScore)
+			score = escScore;
+		$(this).val(score);
+		e.preventDefault();
+		if (nextHole == 19)
+			$("#create_score_button").focus();
+		else
+			$("#score_score_hole_" + nextHole).focus();
+	});
+
+
+	function GetESCScore(courseHandicap, par)
+	{
+		if (courseHandicap <= 9)
+			return (parseInt(par) + 2);
+		else if (courseHandicap <= 19)
+			return 7;
+		else if (courseHandicap <= 29)
+			return 8;
+		else if (courseHandicap <= 39)
+			return 9;
+		else 
+			return 10;
+	}
+
+
+	//
+	//  On the new score page, populate the tees dropdown after a course is picked, then display it
 	//
 	$("#course_select_box").change(function(){
 		var courseId = $(this).find(":selected").attr("value");
 		if (courseId.length > 0)
 		{
-			$('#tee_select_box').empty();
-			$('#tee_select_box').append('<option value="">Select a tee</option>');
+			$('#tee_select_control').empty();
+			$('#tee_select_control').append('<option value="">Select a tee</option>');
 			if (courseId == "Add a course")
 				window.location.href = "/courses/new";
 			else
@@ -107,9 +165,10 @@ ready = function() {
 				    	if (data.length > 0)
 				    	{
 					        for (i = 0; i < data.length; i++)
-					        	$('#tee_select_box').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+					        	$('#tee_select_control').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
 				        }
-				        $('#tee_select_box').append('<option value="Add a tee">...Add a tee</option>');
+				        $('#tee_select_control').append('<option value="Add a tee">...Add a tee</option>');
+				        $('#tee_select_div').show();
 				    }        
 				});
 			}
@@ -121,7 +180,7 @@ ready = function() {
 	//
 	//  On the new score page, populate the par values on the scorecard after a tee is picked.
 	//
-	$("#tee_select_box").change(function(){
+	$("#tee_select_control").change(function(){
 		var teeId = $(this).find(":selected").attr("value");
 		if (teeId.length > 0)
 		{
@@ -140,6 +199,8 @@ ready = function() {
 				    success: function(data){
 				    	for (i=1; i<19; i++)
 				    		$("#par_hole_" + i).html(data["par_hole_" + i]);
+				    	$('#scorecard_holes_table').show();
+				    	$('#create_score_button').show();
 				    }        
 				});
 			}
