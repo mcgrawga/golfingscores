@@ -1,5 +1,6 @@
 class Tee < ActiveRecord::Base
 	belongs_to :course
+	has_many :scores
 
 	validates :name, :course_rating, :slope_rating, :course_id, presence: true
 

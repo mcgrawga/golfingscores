@@ -8,7 +8,11 @@
 	</div>
 
 
-	<div class="form-group">
+	<div class="form-group" id="date_played_div" >
+		<%= f.text_field :date_played, :class => 'form-control', :placeholder => 'Select a date...', :id => 'date_played_scorecard' %>
+	</div>
+
+	<div class="form-group" id="course_select_div">
 		<select class="form-control" id="course_select_box">
 			<option value="">Select a course</option>
 			<% @courses.each do |course| %>
@@ -19,7 +23,7 @@
 	</div>
 
 	<div class="form-group" id="tee_select_div" >
-		<select class="form-control" id="tee_select_control">
+		<select class="form-control" id="tee_select_control" name="score[tee_id]">
 		</select>
 	</div>
 
@@ -36,6 +40,7 @@
 			<td class="center_content scorecard_label">7</td>
 			<td class="center_content scorecard_label">8</td>
 			<td class="center_content scorecard_label">9</td>
+			<td class="center_content scorecard_label">Front</td>
 		<tr>
 		<tr>
 			<td class="scorecard_label">Par</td>
@@ -48,9 +53,14 @@
 			<td id="par_hole_7" class="center_content scorecard_label"></td>
 			<td id="par_hole_8" class="center_content scorecard_label"></td>
 			<td id="par_hole_9" class="center_content scorecard_label"></td>
+			<td id="" class="center_content scorecard_label">Total</td>
 		<tr>
 		<tr>
-			<td class="scorecard_label">Score</td>
+			<td>
+				<div class="form-group" style="vertical-align: middle;">
+					<span class="scorecard_label">Score</span>
+				</div>
+			</td>
 			<td>
 				<div class="form-group" style="vertical-align: middle;">
 					<%= f.text_field :score_hole_1, :class => 'form-control' %>
@@ -96,7 +106,84 @@
 					<%= f.text_field :score_hole_9, :class => 'form-control' %>
 				</div>
 			</td>
+			<td>
+				<div class="form-group">
+					<input type="text" class="form-control" id="front_nine_total" name="front_nine_total"/>
+				</div>
+			</td>
 		</tr>
+
+		<tr>
+			<td>
+				<div class="form-group" style="vertical-align: middle;">
+					<span class="scorecard_label">Putts</span>
+				</div>
+			</td>
+			<td>
+				<div class="form-group" style="vertical-align: middle;">
+					<%= f.text_field :putts_hole_1, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_2, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_3, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_4, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_5, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_6, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_7, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_8, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_9, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<input type="text" class="form-control" id="front_nine_putts_total" name="front_nine_putts_total"/>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td /> 
+		<tr>
 
 		<tr>
 			<td class="scorecard_label">Hole</td>
@@ -109,6 +196,7 @@
 			<td class="center_content scorecard_label">16</td>
 			<td class="center_content scorecard_label">17</td>
 			<td class="center_content scorecard_label">18</td>
+			<td class="center_content scorecard_label">Back</td>
 		<tr>
 		<tr>
 			<td class="scorecard_label">Par</td>
@@ -121,9 +209,14 @@
 			<td id="par_hole_16" class="center_content scorecard_label"></td>
 			<td id="par_hole_17" class="center_content scorecard_label"></td>
 			<td id="par_hole_18" class="center_content scorecard_label"></td>
+			<td id="" class="center_content scorecard_label">Total</td>
 		<tr>
 		<tr>
-			<td class="scorecard_label">Score</td>
+			<td>
+				<div class="form-group" style="vertical-align: middle;">
+					<span class="scorecard_label">Score</span>
+				</div>
+			</td>
 			<td>
 				<div class="form-group">
 					<%= f.text_field :score_hole_10, :class => 'form-control' %>
@@ -169,7 +262,170 @@
 					<%= f.text_field :score_hole_18, :class => 'form-control' %>
 				</div>
 			</td>
+			<td>
+				<div class="form-group">
+					<input type="text" class="form-control" id="back_nine_total" name="back_nine_total"/>
+				</div>
+			</td>
 		</tr>
+		<tr>
+			<td>
+				<div class="form-group" style="vertical-align: middle;">
+					<span class="scorecard_label">Putts</span>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_10, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_11, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_12, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_13, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_14, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_15, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_16, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_17, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :putts_hole_18, :class => 'form-control' %>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<input type="text" class="form-control" id="back_nine_putts_total" name="back_nine_putts_total"/>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td>
+				<div class="form-group">
+					<span class="scorecard_label">Total Score</span>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<input type="text" class="form-control" id="total_score" name="total_score" />
+				</div>
+			</td>
+		<tr>
+
+		<tr>
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td>
+				<div class="form-group">
+					<span class="scorecard_label">Total Putts</span>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<input type="text" class="form-control" id="total_putts" name="total_putts" />
+				</div>
+			</td>
+		<tr>
+		<tr>
+			<td colspan="2">
+				<div class="form-group">
+					<span class="scorecard_label">Greens in Regulation</span>
+				</div>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :greens_in_regulation, :class => 'form-control' %>
+				</div>
+			</td>
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+		<tr>
+		<tr>
+			<td colspan="2">
+				<div class="form-group">
+					<span class="scorecard_label">Fairways Hit</span>
+				</div>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :fairways_hit, :class => 'form-control' %>
+				</div>
+			</td>
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+		<tr>
+		<tr>
+			<td colspan="2">
+				<div class="form-group">
+					<span class="scorecard_label">Penalties</span>
+				</div>
+			<td>
+				<div class="form-group">
+					<%= f.text_field :penalties, :class => 'form-control' %>
+				</div>
+			</td>
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+		<tr>
 
 	</table>
 	

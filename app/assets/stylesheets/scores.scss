@@ -2,8 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#course_select_div{
+	display: none;
+}
+
 #tee_select_div{
 	display: none;
+	margin-bottom: 2em;
 }
 
 #scorecard_holes_table{
@@ -13,3 +18,4 @@
 #create_score_button{
 	display: none;
 }
+

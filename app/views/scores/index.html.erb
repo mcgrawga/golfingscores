@@ -1,3 +1,11 @@
 <%content_for :page_title do%>Scores<%end%>
 <%content_for :page_header do%>Scores<%end%>
-Show these scores Bitches!
+<%= link_to 'Add a Score', new_score_path, class: "add_course_link" %>
+
+
+<div class="clear_float"></div>
+<div class="list-group">
+	<% @scores.each do |score| %>
+		<%= link_to score.tee.course.name, edit_score_path(score.id), class: "list-group-item" %>
+	<% end %>
+</div>

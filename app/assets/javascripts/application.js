@@ -12,12 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/datepicker
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
 
 var ready;
 ready = function() {
+	$( "#date_played_scorecard" ).datepicker();
 
 
 	$('#new_user').submit(function(event) {
@@ -72,7 +74,7 @@ ready = function() {
 			holeNum = inputId.slice(-1);
 		else
 			holeNum = inputId.slice(-2);;
-		var nextHole = parseFloat(holeNum) + 1;
+		var nextHole = parseInt(holeNum) + 1;
 		var parValue = $(this).val();
 		if( parValue >= 3 && parValue <= 5)
 			if (nextHole < 19)
@@ -98,35 +100,118 @@ ready = function() {
 	//
 
 
-	$("[id^=score_score_hole_]").keypress(function(e){
-		var inputId = $(this).attr("id");
-		var holeNum = 0;
-		if (inputId.length == 18)
-			holeNum = inputId.slice(-1);
+	$("[id^=score_score_hole_]").keyup(function(e){
+		if ((e.keyCode <= 57 && e.keyCode >= 48) || (e.keyCode <= 105 && e.keyCode >= 96) )  // only react to numbers
+		{
+			console.log("key code:  " + e.keyCode);
+			var inputId = $(this).attr("id");
+			var holeNum = 0;
+			if (inputId.length == 18)
+				holeNum = inputId.slice(-1);
+			else
+				holeNum = inputId.slice(-2);
+			var par = $("#par_hole_" + holeNum).html();
+			var courseHandicap = 9;
+			var nextHole = parseInt(holeNum) + 1;
+			var score = $(this).val();
+			if (score == 1)
+				return;
+			var escScore = GetESCScore(courseHandicap, par);
+			if (score > escScore)
+				score = escScore;
+			$(this).val(score);
+			if (nextHole == 19)
+				$("#score_putts_hole_10").focus();
+			else if (nextHole == 10)
+				$("#score_putts_hole_1").focus();
+			else
+				$("#score_score_hole_" + nextHole).focus();
+
+			//
+			//  Calculate total scores
+			//
+			var frontNineScore = 0;
+			var backNineScore = 0;
+			var totalScore = 0;
+			for (i = 1; i <= 18; i++)
+			{
+				var holeVal = parseInt($("#score_score_hole_" + i).val());
+				if (!isNaN(holeVal))
+				{
+					if (i <= 9)
+						frontNineScore += holeVal;
+					if (i >= 10 && i <= 18)
+						backNineScore += holeVal;
+					totalScore += holeVal;
+				}
+			}
+			if (frontNineScore > 0)
+				$('#front_nine_total').val(frontNineScore);
+			if (backNineScore > 0)
+				$('#back_nine_total').val(backNineScore);
+			if (totalScore > 0)
+				$('#total_score').val(totalScore);
+		}
 		else
-			holeNum = inputId.slice(-2);
-		var par = $("#par_hole_" + holeNum).html();
-		var courseHandicap = 9;
-		var nextHole = parseFloat(holeNum) + 1;
-		var input = String.fromCharCode(e.which)
-		if (isNaN(input))
 		{
 			e.preventDefault();
 			return;
 		}
-		var score = $(this).val() + input;
-		if (score == 1)
-			return;
-		var escScore = GetESCScore(courseHandicap, par);
-		if (score > escScore)
-			score = escScore;
-		$(this).val(score);
-		e.preventDefault();
-		if (nextHole == 19)
-			$("#create_score_button").focus();
-		else
-			$("#score_score_hole_" + nextHole).focus();
 	});
+
+
+	$("[id^=score_putts_hole_]").keyup(function(e){
+		if ((e.keyCode <= 57 && e.keyCode >= 48) || (e.keyCode <= 105 && e.keyCode >= 96) )  // only react to numbers
+		{
+			var inputId = $(this).attr("id");
+			var holeNum = 0;
+			if (inputId.length == 18)
+				holeNum = inputId.slice(-1);
+			else
+				holeNum = inputId.slice(-2);
+			var nextHole = parseInt(holeNum) + 1;
+			var score = $(this).val();
+			$(this).val(score);
+			if (nextHole == 19)
+				$("#score_greens_in_regulation").focus();
+			if (nextHole == 10)
+				$("#score_score_hole_" + nextHole).focus();
+			else
+				$("#score_putts_hole_" + nextHole).focus();
+
+			//
+			//  Calculate total scores
+			//
+			var frontNineScore = 0;
+			var backNineScore = 0;
+			var totalScore = 0;
+			for (i = 1; i <= 18; i++)
+			{
+				var holeVal = parseInt($("#score_putts_hole_" + i).val());
+				if (!isNaN(holeVal))
+				{
+					if (i <= 9)
+						frontNineScore += holeVal;
+					if (i >= 10 && i <= 18)
+						backNineScore += holeVal;
+					totalScore += holeVal;
+				}
+			}
+			if (frontNineScore > 0)
+				$('#front_nine_putts_total').val(frontNineScore);
+			if (backNineScore > 0)
+				$('#back_nine_putts_total').val(backNineScore);
+			if (totalScore > 0)
+				$('#total_putts').val(totalScore);
+		}
+		else
+		{
+			e.preventDefault();
+			return;
+		}
+	});
+
+
 
 
 	function GetESCScore(courseHandicap, par)
@@ -142,6 +227,13 @@ ready = function() {
 		else 
 			return 10;
 	}
+
+	//
+	//  On the new score page, show the course dropdown after a date is selected
+	//
+	$("#date_played_scorecard").change(function(){
+		$("#course_select_div").show();
+	})
 
 
 	//
@@ -184,7 +276,6 @@ ready = function() {
 		var teeId = $(this).find(":selected").attr("value");
 		if (teeId.length > 0)
 		{
-			console.log(teeId);
 			if (teeId == "Add a tee")
 			{
 				var courseId = $("#course_select_box").find(":selected").attr("value");
@@ -201,6 +292,7 @@ ready = function() {
 				    		$("#par_hole_" + i).html(data["par_hole_" + i]);
 				    	$('#scorecard_holes_table').show();
 				    	$('#create_score_button').show();
+				    	$('#score_score_hole_1').focus();
 				    }        
 				});
 			}
@@ -209,8 +301,10 @@ ready = function() {
 
 };
 
-$(document).ready(ready);
-$(document).on('page:load', ready);
+// $(document).ready(ready);
+// $(document).on('page:load', ready);
+
+$(document).on('turbolinks:load', ready);
 
 
 
