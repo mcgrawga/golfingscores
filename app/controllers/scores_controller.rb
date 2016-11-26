@@ -3,7 +3,7 @@ class ScoresController < ApplicationController
 	before_filter :check_for_subscription
 
 	def index
-		@scores = Score.joins("INNER JOIN tees ON tees.id = scores.tee_id INNER JOIN courses ON courses.id = tees.course_id and courses.user_id = %s" % current_user.id.to_s)
+		@scores = Score.joins("INNER JOIN tees ON tees.id = scores.tee_id INNER JOIN courses ON courses.id = tees.course_id and courses.user_id = %s" % current_user.id.to_s).order(date_played: :desc)
 		log("Userid:  %s" %  current_user.id.to_s)
 	end
 
@@ -22,6 +22,17 @@ class ScoresController < ApplicationController
 			redirect_to scores_path
 		else
 			render :new
+		end
+	end
+
+	def edit
+		# @score = Score.joins("INNER JOIN tees ON tees.id = scores.tee_id INNER JOIN courses ON courses.id = tees.course_id and courses.user_id = %s" % current_user.id.to_s).first
+		# @score = Score.where("id = ?", params[:id])
+		@score = Score.find(params[:id])
+		if (@score.tee.course.user_id == current_user.id)
+			@courses = Course.where("user_id = ?", current_user.id).order("name ASC")
+		else
+			redirect_to notauthorized_path
 		end
 	end
 

@@ -432,6 +432,6 @@
 	
 	<%= f.submit class: "btn btn-primary", id: "create_score_button"%>
 	<% if !@score.id.blank? %>
-		<%= link_to 'Delete Score', score_path(@course), method: :delete, class: "delete_score_link" %>
+		<%= link_to 'Delete Score', score_path(@score), method: :delete, class: "delete_score_link" %>
 	<% end %>
 <% end %>

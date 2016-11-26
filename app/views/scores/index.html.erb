@@ -4,8 +4,24 @@
 
 
 <div class="clear_float"></div>
-<div class="list-group">
-	<% @scores.each do |score| %>
-		<%= link_to score.tee.course.name, edit_score_path(score.id), class: "list-group-item" %>
-	<% end %>
-</div>
+
+
+<table class="table table-striped"> 
+	<thead> 
+		<tr> 
+			<th>Date</th> 
+			<th>Course</th> 
+			<th>Score</th> 
+		</tr> 
+	</thead> 
+	<tbody> 
+		<% @scores.each do |score| %>
+			<tr>
+				<!-- <td><%= score.date_played.strftime("%b %d, %Y") %></td> -->
+				<td><%= "%s %s, %s" % [score.date_played.strftime("%b"), score.date_played.day.ordinalize, score.date_played.year] %></td>
+				<td><%= score.tee.course.name %></td> 
+				<td><%= link_to score.total, edit_score_path(score.id) %></td> 
+			</tr>
+		<% end %>
+	</tbody> 
+</table>

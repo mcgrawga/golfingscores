@@ -3,4 +3,6 @@ class StaticpagesController < ApplicationController
   end
   def about
   end
+  def notauthorized
+  end
 end

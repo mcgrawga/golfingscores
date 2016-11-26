@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'staticpages#index'
   get 'about' => 'staticpages#about'
+  get 'notauthorized' => 'staticpages#notauthorized'
 
   #get 'scores' => 'scores#index'
   #get 'scores/new' => 'scores#new'
