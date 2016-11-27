@@ -15,7 +15,7 @@ class CoursesController < ApplicationController
 		@course.user_id = current_user.id
 		if @course.valid?
 			@course.save
-			redirect_to courses_path
+			redirect_to new_course_tee_path(@course.id)
 		else
 			render :new
 		end

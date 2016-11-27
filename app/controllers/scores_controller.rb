@@ -36,6 +36,27 @@ class ScoresController < ApplicationController
 		end
 	end
 
+	def update
+		@score = Score.find(params[:id])
+		@score.assign_attributes(score_params)
+		@score.date_played = DateTime.strptime(score_params[:date_played], "%m/%d/%Y")
+		log("Date played from parms:  " + score_params[:date_played])
+		log("What it is going to get set to:  " + DateTime.strptime(score_params[:date_played], "%m/%d/%Y").to_s)
+		log("Date played from object:  " + @score.date_played.to_s)
+		if @score.valid?
+			@score.save
+			redirect_to scores_path
+		else
+			render :edit
+		end
+	end
+
+	def destroy
+		@score = Score.find(params[:id])
+		@score.destroy
+		redirect_to scores_path
+	end
+
 	def get_tees_for_course
 		@tees = Tee.where("course_id = ?", params[:id]).order("name ASC")
 		render json: @tees
@@ -66,6 +87,27 @@ class ScoresController < ApplicationController
 							:score_hole_16,
 							:score_hole_17,
 							:score_hole_18,
+							:putts_hole_1,
+							:putts_hole_2,
+							:putts_hole_3,
+							:putts_hole_4,
+							:putts_hole_5,
+							:putts_hole_6,
+							:putts_hole_7,
+							:putts_hole_8,
+							:putts_hole_9,
+							:putts_hole_10,
+							:putts_hole_11,
+							:putts_hole_12,
+							:putts_hole_13,
+							:putts_hole_14,
+							:putts_hole_15,
+							:putts_hole_16,
+							:putts_hole_17,
+							:putts_hole_18,
+							:fairways_hit,
+							:greens_in_regulation,
+							:penalties,
 							:date_played,
 							:tee_id
 							)
