@@ -1,11 +1,13 @@
 <%= form_for @score do |f| %>
-	<div class="errors">
-		<ul>
-			<% @score.errors.full_messages.each do |message| %>
-				<li><%= message %></li>
-			<%end%>
-		<ul>
-	</div>
+	<% if (@score.errors.full_messages.count() > 0) %>
+		<div class="errors">
+			<ul>
+				<% @score.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<%end%>
+			<ul>
+		</div>
+	<% end %>
 
 
 	<div class="form-group" id="date_played_div" >
@@ -438,6 +440,6 @@
 	
 	<%= f.submit class: "btn btn-primary", id: "create_score_button"%>
 	<% if !@score.id.blank? %>
-		<%= link_to 'Delete Score', score_path(@score), method: :delete, class: "delete_score_link" %>
+		<%= link_to 'Delete Score', score_path(@score), method: :delete, class: "delete_score_link", data: {confirm: "Are you sure?"} %>
 	<% end %>
 <% end %>

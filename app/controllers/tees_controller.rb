@@ -1,22 +1,26 @@
 class TeesController < ApplicationController
+	before_filter :check_for_login
+	before_filter :check_for_subscription
+
 	def new
 		@course = Course.where("user_id = ? and id = ?", current_user.id, params[:course_id]).first
 		@tee = Tee.new
 	end
 
 	def create
-		log("Got to create in tees controller")
-		@tee = Tee.new(tee_params)
-		@tee.course_id = params[:course_id]
-		if @tee.valid?
-			log("Valid Tee")
-			@tee.save
-			log("Saved Tee")
-			redirect_to edit_course_path(params[:course_id])
+		@course = Course.find(params[:course_id])
+		if (@course.user_id == current_user.id)
+			@tee = Tee.new(tee_params)
+			@tee.course_id = params[:course_id]
+			if @tee.valid?
+				@tee.save
+				redirect_to edit_course_path(params[:course_id])
+			else
+				@course = Course.where("user_id = ? and id = ?", current_user.id, params[:course_id]).first
+				render :new
+			end
 		else
-			log("Invalid Tee")
-			@course = Course.where("user_id = ? and id = ?", current_user.id, params[:course_id]).first
-			render :new
+			redirect_to notauthorized_path
 		end
 	end
 
@@ -39,6 +43,7 @@ class TeesController < ApplicationController
 		@course = Course.where("user_id = ? and id = ?", current_user.id, params[:course_id]).first
 		@tee = Tee.where("course_id = ? and id = ?", @course.id, params[:id]).first
 		@tee.destroy
+
 		redirect_to edit_course_path(params[:course_id])
 	end
 

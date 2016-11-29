@@ -1,11 +1,13 @@
 <%= form_for @course do |f| %>
-	<div class="errors">
-		<ul>
-			<% @course.errors.full_messages.each do |message| %>
-				<li><%= message %></li>
-			<%end%>
-		<ul>
-	</div>
+	<% if (@course.errors.full_messages.count() > 0) %>
+		<div class="errors">
+			<ul>
+				<% @course.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<%end%>
+			<ul>
+		</div>
+	<% end %>
 
 	<div class="form-group">
 		<%= f.label :name %>
@@ -103,6 +105,6 @@
 
   		<%= f.submit class: "btn btn-primary"%>
   		<% if !@course.id.blank? %>
-  			<%= link_to 'Delete Course', course_path(@course), method: :delete, class: "delete_course_link" %>
+  			<%= link_to 'Delete Course', course_path(@course), method: :delete, class: "delete_course_link", data: {confirm: "Are you sure, this will delete all tees and scores for this course as well as the course?"} %>
   		<% end %>
 <% end %>

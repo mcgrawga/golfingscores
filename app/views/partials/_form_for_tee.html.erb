@@ -1,11 +1,13 @@
 <%= form_for [@course, @tee] do |f| %>
-	<div class="errors">
-		<ul>
-			<% @tee.errors.full_messages.each do |message| %>
-				<li><%= message %></li>
-			<%end%>
-		<ul>
-	</div>
+	<% if (@tee.errors.full_messages.count() > 0) %>
+		<div class="errors">
+			<ul>
+				<% @tee.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<%end%>
+			<ul>
+		</div>
+	<% end %>
 
 	<div class="form-group">
 		<%= f.label :name, 'Tee name'%>
@@ -32,6 +34,7 @@
 			<td class="center_content scorecard_label">7</td>
 			<td class="center_content scorecard_label">8</td>
 			<td class="center_content scorecard_label">9</td>
+			<td class="center_content scorecard_label">Front</td>
 		<tr>
 		<tr>
 			<td class="scorecard_label">Par</td>
@@ -80,6 +83,11 @@
 					<%= f.text_field :par_hole_9, :class => 'form-control' %>
 				</div>
 			</td>
+			<td>
+				<div class="form-group">
+					<input type="text" class="form-control" id="front_nine_total"/>
+				</div>
+			</td>
 		</tr>
 
 		<tr>
@@ -93,6 +101,7 @@
 			<td class="center_content scorecard_label">16</td>
 			<td class="center_content scorecard_label">17</td>
 			<td class="center_content scorecard_label">18</td>
+			<td class="center_content scorecard_label">Back</td>
 		<tr>
 		<tr>
 			<td class="scorecard_label">Par</td>
@@ -141,13 +150,39 @@
 					<%= f.text_field :par_hole_18, :class => 'form-control' %>
 				</div>
 			</td>
+			<td>
+				<div class="form-group">
+					<input type="text" class="form-control" id="back_nine_total"/>
+				</div>
+			</td>
 		</tr>
+		<tr>
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td />
+			<td>
+				<div class="form-group">
+					<span class="scorecard_label">Total Score</span>
+				</div>
+			</td>
+			<td>
+				<div class="form-group">
+					<input type="text" class="form-control" id="total_score" name="total_score" />
+				</div>
+			</td>
+		<tr>
 
 	</table>
 
 
 	<%= f.submit class: "btn btn-primary", id: "create_tee_button"%>
 	<% if !@tee.id.blank? %>
-		<%= link_to 'Delete Tee', course_tee_path(@course.id, @tee.id), method: :delete, class: "delete_course_link" %>
+		<%= link_to 'Delete Tee', course_tee_path(@course.id, @tee.id), method: :delete, class: "delete_course_link", data: {confirm: "Are you sure, this will delete all scores for this tee as well as the tee?"} %>
 	<% end %>
 <% end %>

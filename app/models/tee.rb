@@ -1,6 +1,7 @@
 class Tee < ActiveRecord::Base
 	belongs_to :course
-	has_many :scores
+	default_scope { order('name ASC') }
+	has_many :scores, :dependent => :destroy
 
 	validates :name, :course_rating, :slope_rating, :course_id, presence: true
 
