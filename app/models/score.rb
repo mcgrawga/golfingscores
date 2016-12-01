@@ -1,6 +1,9 @@
 class Score < ActiveRecord::Base
 	belongs_to :tee
 
+	validates :score_hole_1, :numericality => { :greater_than_or_equal_to => 1 }, 
+	presence: true
+
 	def total
 		score = 0
 		(1..18).each do |i|

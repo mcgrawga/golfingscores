@@ -34,7 +34,7 @@ html {
 }
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin-bottom: 110px;
 }
 #footer {
   position: absolute;
@@ -45,6 +45,7 @@ body {
   background-color: #f5f5f5;
   padding-right:50px;
   padding-left:50px;
+  margin-top: 50px;
 }
 
 #footer_bracket {

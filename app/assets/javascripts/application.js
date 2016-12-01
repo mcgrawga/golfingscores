@@ -62,53 +62,7 @@ ready = function() {
 		}
 	};
 
-	//
-	//	Move the cursor to the next tee input box if user enters a 3,4,5.
-	//  Blank and clear the input if user enters anything other than 3,4,5.
-	//  This is only for entering or updating tees, not scores.
-	//
-	// $("[id^=tee_par_hole_]").keyup(function(){
-	// 	var inputId = $(this).attr("id");
-	// 	var holeNum = 0;
-	// 	if (inputId.length == 14)
-	// 		holeNum = inputId.slice(-1);
-	// 	else
-	// 		holeNum = inputId.slice(-2);;
-	// 	var nextHole = parseInt(holeNum) + 1;
-	// 	var parValue = $(this).val();
-	// 	if( parValue >= 3 && parValue <= 5)
-	// 		if (nextHole < 19)
-	// 			$("#tee_par_hole_" + nextHole).focus();
-	// 		else
-	// 			$("#create_tee_button").focus();
-	// 	else
-	// 		$(this).val('');
 
-	// 	//
-	// 	//  Calculate total scores
-	// 	//
-	// 	var frontNineScore = 0;
-	// 	var backNineScore = 0;
-	// 	var totalScore = 0;
-	// 	for (i = 1; i <= 18; i++)
-	// 	{
-	// 		var holeVal = parseInt($("#tee_par_hole_" + i).val());
-	// 		if (!isNaN(holeVal))
-	// 		{
-	// 			if (i <= 9)
-	// 				frontNineScore += holeVal;
-	// 			if (i >= 10 && i <= 18)
-	// 				backNineScore += holeVal;
-	// 			totalScore += holeVal;
-	// 		}
-	// 	}
-	// 	if (frontNineScore > 0)
-	// 		$('#front_nine_total').val(frontNineScore);
-	// 	if (backNineScore > 0)
-	// 		$('#back_nine_total').val(backNineScore);
-	// 	if (totalScore > 0)
-	// 		$('#total_score').val(totalScore);
-	// });
 
 
 	//
@@ -239,12 +193,16 @@ ready = function() {
 		}
 		else
 		{
+			$(this).val("");
 			e.preventDefault();
 			return;
 		}
 	});
 
-
+	//
+	//  Move the cursor to the next putt input box if user enters a numeric value.
+	//  Calculate total putts also.
+	//
 	$("[id^=score_putts_hole_]").keyup(function(e){
 		if ((e.keyCode <= 57 && e.keyCode >= 48) || (e.keyCode <= 105 && e.keyCode >= 96) )  // only react to numbers
 		{
@@ -260,7 +218,12 @@ ready = function() {
 			if (nextHole == 19)
 				$("#score_greens_in_regulation").focus();
 			if (nextHole == 10)
-				$("#score_score_hole_" + nextHole).focus();
+			{
+				if ($("#score_score_hole_" + nextHole).is(":visible"))
+					$("#score_score_hole_" + nextHole).focus();
+				else
+					$("#score_greens_in_regulation").focus();		// skip back 9 if there are only 9 holes on course
+			}
 			else
 				$("#score_putts_hole_" + nextHole).focus();
 
@@ -291,6 +254,7 @@ ready = function() {
 		}
 		else
 		{
+			$(this).val("");
 			e.preventDefault();
 			return;
 		}
@@ -378,7 +342,23 @@ ready = function() {
 				    	$('#scorecard_holes_table').show();
 				    	$('#create_score_button').show();
 				    	$('#score_score_hole_1').focus();
-				    }        
+
+				    	// hide back 9 if it is only a 9 hole course
+				    	if (data["par_hole_10"] == null)
+				    	{
+							$("#back_9_hole_label_row").hide();
+							$("#back_9_par_label_row").hide();
+							$("#back_9_scores_row").hide();
+							$("#back_9_putts_row").hide();
+						}
+						else
+						{
+							$("#back_9_hole_label_row").show();
+							$("#back_9_par_label_row").show();
+							$("#back_9_scores_row").show();
+							$("#back_9_putts_row").show();
+						}	
+				    }    
 				});
 			}
 		}
@@ -394,12 +374,39 @@ ready = function() {
 		$("#tee_select_div").show();
 		$("#scorecard_holes_table").show();
 		$("#create_score_button").show();
+
+		// hide back 9 if it is only a 9 hole course
+    	if ($("#par_hole_10").html() == "")
+    	{
+			$("#back_9_hole_label_row").hide();
+			$("#back_9_par_label_row").hide();
+			$("#back_9_scores_row").hide();
+			$("#back_9_putts_row").hide();
+		}
+		else
+		{
+			$("#back_9_hole_label_row").show();
+			$("#back_9_par_label_row").show();
+			$("#back_9_scores_row").show();
+			$("#back_9_putts_row").show();
+		}	
 	}
 
+	//
+	//  On the edit tee page, hide back 9 if it is a 9 hole tee.
+	//
+	var title = $(document).attr('title');
+	if (title == 'Statgolf Edit Tee')
+	{
+		// hide back 9 if it is only a 9 hole tee
+    	if ($("#tee_par_hole_10").val() == "")
+    	{
+			$("#back_9_hole_label_row").hide();
+			$("#back_9_par_nums").hide();
+		}
+	}
 };
 
-// $(document).ready(ready);
-// $(document).on('page:load', ready);
 
 $(document).on('turbolinks:load', ready);
 

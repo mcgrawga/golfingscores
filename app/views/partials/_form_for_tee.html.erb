@@ -85,12 +85,12 @@
 			</td>
 			<td>
 				<div class="form-group">
-					<input type="text" class="form-control" id="front_nine_total"/>
+					<input type="text" value=<%= @tee.par_total_front_9%> class="form-control" id="front_nine_total"/>
 				</div>
 			</td>
 		</tr>
 
-		<tr>
+		<tr id="back_9_hole_label_row">
 			<td class="scorecard_label">Hole</td>
 			<td class="center_content scorecard_label">10</td>
 			<td class="center_content scorecard_label">11</td>
@@ -103,7 +103,7 @@
 			<td class="center_content scorecard_label">18</td>
 			<td class="center_content scorecard_label">Back</td>
 		<tr>
-		<tr>
+		<tr id="back_9_par_nums">
 			<td class="scorecard_label">Par</td>
 			<td>
 				<div class="form-group">
@@ -152,7 +152,7 @@
 			</td>
 			<td>
 				<div class="form-group">
-					<input type="text" class="form-control" id="back_nine_total"/>
+					<input type="text" value=<%= @tee.par_total_back_9%> class="form-control" id="back_nine_total"/>
 				</div>
 			</td>
 		</tr>
@@ -173,7 +173,7 @@
 			</td>
 			<td>
 				<div class="form-group">
-					<input type="text" class="form-control" id="total_score" name="total_score" />
+					<input type="text" value=<%= @tee.par_total%> class="form-control" id="total_score" name="total_score" />
 				</div>
 			</td>
 		<tr>

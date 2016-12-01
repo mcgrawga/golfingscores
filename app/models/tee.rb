@@ -16,4 +16,31 @@ class Tee < ActiveRecord::Base
 	validates :slope_rating, :numericality => { :greater_than_or_equal_to => 55, :less_than_or_equal_to => 155 }
 	validates :course_rating, numericality: true
 
+	def par_total
+		par = 0
+		(1..18).each do |i|
+   			current_hole = "par_hole_" + i.to_s
+   			par = par + send(current_hole).to_i
+		end
+		par
+  	end
+
+  	def par_total_front_9
+		par = 0
+		(1..9).each do |i|
+   			current_hole = "par_hole_" + i.to_s
+   			par = par + send(current_hole).to_i
+		end
+		par
+  	end
+
+  	def par_total_back_9
+		par = 0
+		(10..18).each do |i|
+   			current_hole = "par_hole_" + i.to_s
+   			par = par + send(current_hole).to_i
+		end
+		par
+  	end
+
 end
