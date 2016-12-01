@@ -25,3 +25,49 @@
 	color: mintcream;
 }
 
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+  padding-right:50px;
+  padding-left:50px;
+}
+
+#footer_bracket {
+  position: absolute;
+  bottom: 0;
+  width: 1755px;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+  padding-right:50px;
+  padding-left:50px;
+}
+
+.footer_content{
+  line-height:60px;
+  font-size:18px;
+}
+
+.float_right{
+	float: right;
+}
+
+.float_left{
+	float: left;
+}
+
