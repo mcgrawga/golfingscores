@@ -21,7 +21,8 @@ class ScoresController < ApplicationController
 			@score.save
 			redirect_to scores_path
 		else
-			render :new
+			@courses = Course.where("user_id = ?", current_user.id).order("name ASC")
+			render :validate
 		end
 	end
 

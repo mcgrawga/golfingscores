@@ -368,7 +368,7 @@ ready = function() {
 	//  On the edit score page, unhide all the elements on the scorecard
 	//
 	var title = $(document).attr('title');
-	if (title == 'Statgolf Edit Score')
+	if (title == 'Statgolf Edit Score' || $(".errors").is(":visible"))
 	{
 		$("#course_select_div").show();
 		$("#tee_select_div").show();
