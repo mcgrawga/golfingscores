@@ -27,8 +27,6 @@ class ScoresController < ApplicationController
 	end
 
 	def edit
-		# @score = Score.joins("INNER JOIN tees ON tees.id = scores.tee_id INNER JOIN courses ON courses.id = tees.course_id and courses.user_id = %s" % current_user.id.to_s).first
-		# @score = Score.where("id = ?", params[:id])
 		@score = Score.find(params[:id])
 		if (@score.tee.course.user_id == current_user.id)
 			@courses = Course.where("user_id = ?", current_user.id).order("name ASC")
@@ -48,7 +46,12 @@ class ScoresController < ApplicationController
 			@score.save
 			redirect_to scores_path
 		else
-			render :edit
+			if (@score.tee.course.user_id == current_user.id)
+				@courses = Course.where("user_id = ?", current_user.id).order("name ASC")
+				render :edit
+			else
+				redirect_to notauthorized_path
+			end
 		end
 	end
 

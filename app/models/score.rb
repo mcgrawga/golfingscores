@@ -1,7 +1,12 @@
 class Score < ActiveRecord::Base
 	belongs_to :tee
 
-	# validates :score_hole_1, :numericality => { :greater_than_or_equal_to => 1 }
+	validates 	:score_hole_1, :score_hole_2, :score_hole_3, :score_hole_4, 
+				:score_hole_5, :score_hole_6, :score_hole_7, :score_hole_8, 
+				:score_hole_9, :numericality => { :greater_than_or_equal_to => 1, :less_than_or_equal_to => 10 }
+	validates 	:putts_hole_1, :putts_hole_2, :putts_hole_3, :putts_hole_4, 
+				:putts_hole_5, :putts_hole_6, :putts_hole_7, :putts_hole_8, 
+				:putts_hole_9, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 10 }
 	validate :front9_back9_or_both
 	validate :putts
 
