@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   #post 'courses' => 'courses#create'
   #patch 'course' => 'courses#update'
   #get 'courses/edit/:id' => 'courses#edit'
+  get 'charts' => 'charts#index'
+  get 'charts/get_recent_scores_18' => 'charts#get_recent_scores_18'
+  get 'charts/get_recent_scores_9' => 'charts#get_recent_scores_9'
   resources :scores
   get 'scores/get_tees_for_course/:id' => 'scores#get_tees_for_course'
   get 'scores/get_tee/:id' => 'scores#get_tee'

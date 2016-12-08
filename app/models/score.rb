@@ -182,4 +182,12 @@ class Score < ActiveRecord::Base
 		score
   	end
 
+  	def nine_or_eighteen_hole_score
+		if (total_front_9 > 0 && total_back_9 > 0)
+			return 18
+		else
+			return 9
+		end
+  	end
+
 end

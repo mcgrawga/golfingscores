@@ -405,6 +405,123 @@ ready = function() {
 			$("#back_9_par_nums").hide();
 		}
 	}
+
+
+	//
+	//  On the charts page, load the google charts stuff.
+	//
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawCharts);
+
+
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawCharts() 
+    {
+    	draw18HoleHistoryChart();
+    	draw9HoleHistoryChart();
+    }
+
+    function draw18HoleHistoryChart()
+    {
+    	//
+    	// 18 hole score history
+    	//
+        var chartData = new google.visualization.DataTable();
+        chartData.addColumn('date', 'Date');
+        chartData.addColumn('number', 'Score');
+        chartData.addColumn({ type: 'string', role: 'tooltip', 'p': {'html': true} });
+		$.ajax({
+		    type: "GET",
+		    url: "/charts/get_recent_scores_18",
+		    dataType: "json",
+		    success: function(data){
+		    	if (data.length > 0)
+		    	{
+			        for (i = 0; i < data.length; i++)
+			        {
+			        	chartData.addRow([new Date(data[i].dt), data[i].score, genTooltip(new Date(data[i].dt), data[i].score, data[i].course)]);
+			        	// $('#tee_select_control').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+			        }
+			        // Set chart options
+			        var options = {
+			            'title': '18 Hole Score History',
+			            tooltip: { isHtml: true },
+			            pointSize: 10,
+			            curveType: 'function',
+			            dataOpacity: 0.3,
+			            titleTextStyle: {
+					     //   color: <string>,    // any HTML string color ('red', '#cc00cc')
+					        //fontName: 'Helvetica', // i.e. 'Times New Roman'
+					        fontSize: 24, // 12, 18 whatever you want (don't specify px)
+					        bold: false,    // true or false
+					      //  italic: <boolean>   // true of false
+					    }
+			        };
+
+			        // Instantiate and draw our chart, passing in some options.
+			        var scoreHistoryChart = new google.visualization.LineChart(document.getElementById('score_history_chart_18_hole'));
+			        scoreHistoryChart.draw(chartData, options);
+		        }
+		    }        
+		});
+    }
+
+    function draw9HoleHistoryChart()
+    {
+    	//
+    	// 9 hole score history
+    	//
+        var chartData = new google.visualization.DataTable();
+        chartData.addColumn('date', 'Date');
+        chartData.addColumn('number', 'Score');
+        chartData.addColumn({ type: 'string', role: 'tooltip', 'p': {'html': true} });
+		$.ajax({
+		    type: "GET",
+		    url: "/charts/get_recent_scores_9",
+		    dataType: "json",
+		    success: function(data){
+		    	if (data.length > 0)
+		    	{
+		    		console.log(data);
+			        for (i = 0; i < data.length; i++)
+			        {
+			        	chartData.addRow([new Date(data[i].dt), data[i].score, genTooltip(new Date(data[i].dt), data[i].score, data[i].course)]);
+			        	// $('#tee_select_control').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+			        }
+			        // Set chart options
+			        var options = {
+			            'title': '9 Hole Score History',
+			            tooltip: { isHtml: true },
+			            pointSize: 10,
+			            curveType: 'function',
+			            dataOpacity: 0.3,
+			            titleTextStyle: {
+					     //   color: <string>,    // any HTML string color ('red', '#cc00cc')
+					        //fontName: 'Helvetica', // i.e. 'Times New Roman'
+					        fontSize: 24, // 12, 18 whatever you want (don't specify px)
+					        bold: false,    // true or false
+					      //  italic: <boolean>   // true of false
+					    }
+			        };
+
+			        // Instantiate and draw our chart, passing in some options.
+			        var scoreHistoryChart = new google.visualization.LineChart(document.getElementById('score_history_chart_9_hole'));
+			        scoreHistoryChart.draw(chartData, options);
+		        }
+		    }        
+		});
+    }
+
+    function genTooltip(dt, score, course )
+    {
+        var tooltip = '<div class="tool_tip">#_DATE_#<br>Score:  <b>#_SCORE_#</b><br>#_COURSE_#</div>';
+        tooltip = tooltip.replace('#_DATE_#', dt.toDateString());
+        tooltip = tooltip.replace('#_SCORE_#', score);
+        tooltip = tooltip.replace('#_COURSE_#', course);
+        return tooltip;
+    }
 };
 
 

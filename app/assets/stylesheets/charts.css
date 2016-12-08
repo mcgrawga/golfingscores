@@ -1,0 +1,14 @@
+#score_history_chart{
+	/*border-style: solid;
+	border-color: red;
+	width: 900;
+	height: 1500;*/
+}
+
+.tool_tip{
+/*	border-style: solid;
+	border-color: red;*/
+	padding: 10px;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 1.2em;
+}
