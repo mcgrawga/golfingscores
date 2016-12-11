@@ -1,7 +1,9 @@
 class SingleScore
 	attr_accessor :id
-	attr_accessor :dt
-	attr_accessor :score
+	attr_accessor :year
+	attr_accessor :month
+	attr_accessor :day
+	attr_accessor :total
 	attr_accessor :course
 end
 
@@ -23,8 +25,10 @@ class ChartsController < ApplicationController
 			if (s.nine_or_eighteen_hole_score == 18)
 				@score = SingleScore.new
 				@score.id = s.id
-				@score.dt = s.date_played
-				@score.score = s.total
+				@score.day = s.date_played.day
+				@score.month = s.date_played.month
+				@score.year = s.date_played.year
+				@score.total = s.total
 				@score.course = s.tee.course.name
 				@score.course = @score.course + "  (" + s.tee.name + ")"
 				@recentScores.push(@score)
@@ -46,8 +50,10 @@ class ChartsController < ApplicationController
 			if (s.nine_or_eighteen_hole_score == 9)
 				@score = SingleScore.new
 				@score.id = s.id
-				@score.dt = s.date_played
-				@score.score = s.total
+				@score.day = s.date_played.day
+				@score.month = s.date_played.month
+				@score.year = s.date_played.year
+				@score.total = s.total
 				@score.course = s.tee.course.name
 				@score.course = @score.course + "  (" + s.tee.name + ")"
 				@recentScores.push(@score)

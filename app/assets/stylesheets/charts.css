@@ -1,8 +1,15 @@
-#score_history_chart{
+#score_history_chart_18_hole{
 	/*border-style: solid;
-	border-color: red;
-	width: 900;
-	height: 1500;*/
+	border-color: red;*/
+	width: 1000px;
+	height: 350px;
+}
+
+#score_history_chart_9_hole{
+	/*border-style: solid;
+	border-color: red;*/
+	width: 1000px;
+	height: 300px;
 }
 
 .tool_tip{

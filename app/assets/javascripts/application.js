@@ -429,7 +429,7 @@ ready = function() {
     	// 18 hole score history
     	//
         var chartData = new google.visualization.DataTable();
-        chartData.addColumn('date', 'Date');
+        chartData.addColumn('datetime', 'Date');
         chartData.addColumn('number', 'Score');
         chartData.addColumn({ type: 'string', role: 'tooltip', 'p': {'html': true} });
 		$.ajax({
@@ -439,9 +439,12 @@ ready = function() {
 		    success: function(data){
 		    	if (data.length > 0)
 		    	{
+		    		console.log(data);
 			        for (i = 0; i < data.length; i++)
 			        {
-			        	chartData.addRow([new Date(data[i].dt), data[i].score, genTooltip(new Date(data[i].dt), data[i].score, data[i].course)]);
+			        	// subtract 1 from month b/c js date uses zero based month for some stupid reason
+			        	var dt = new Date(data[i].year, data[i].month - 1, data[i].day);  
+			        	chartData.addRow([dt, data[i].total, genTooltip(dt, data[i].total, data[i].course)]);
 			        	// $('#tee_select_control').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
 			        }
 			        // Set chart options
@@ -452,12 +455,10 @@ ready = function() {
 			            curveType: 'function',
 			            dataOpacity: 0.3,
 			            titleTextStyle: {
-					     //   color: <string>,    // any HTML string color ('red', '#cc00cc')
-					        //fontName: 'Helvetica', // i.e. 'Times New Roman'
 					        fontSize: 24, // 12, 18 whatever you want (don't specify px)
-					        bold: false,    // true or false
-					      //  italic: <boolean>   // true of false
-					    }
+					        bold: false
+					    },
+					    chartArea:{left: 50, right: 100}
 			        };
 
 			        // Instantiate and draw our chart, passing in some options.
@@ -474,7 +475,7 @@ ready = function() {
     	// 9 hole score history
     	//
         var chartData = new google.visualization.DataTable();
-        chartData.addColumn('date', 'Date');
+        chartData.addColumn('datetime', 'Date');
         chartData.addColumn('number', 'Score');
         chartData.addColumn({ type: 'string', role: 'tooltip', 'p': {'html': true} });
 		$.ajax({
@@ -487,7 +488,9 @@ ready = function() {
 		    		console.log(data);
 			        for (i = 0; i < data.length; i++)
 			        {
-			        	chartData.addRow([new Date(data[i].dt), data[i].score, genTooltip(new Date(data[i].dt), data[i].score, data[i].course)]);
+			        	// subtract 1 from month b/c js date uses zero based month for some stupid reason
+			        	var dt = new Date(data[i].year, data[i].month - 1, data[i].day);  
+			        	chartData.addRow([dt, data[i].total, genTooltip(dt, data[i].total, data[i].course)]);
 			        	// $('#tee_select_control').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
 			        }
 			        // Set chart options
@@ -498,12 +501,10 @@ ready = function() {
 			            curveType: 'function',
 			            dataOpacity: 0.3,
 			            titleTextStyle: {
-					     //   color: <string>,    // any HTML string color ('red', '#cc00cc')
-					        //fontName: 'Helvetica', // i.e. 'Times New Roman'
 					        fontSize: 24, // 12, 18 whatever you want (don't specify px)
-					        bold: false,    // true or false
-					      //  italic: <boolean>   // true of false
-					    }
+					        bold: false
+					    },
+					    chartArea:{left: 50, right: 100}
 			        };
 
 			        // Instantiate and draw our chart, passing in some options.

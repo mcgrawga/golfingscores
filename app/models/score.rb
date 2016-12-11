@@ -93,11 +93,23 @@ class Score < ActiveRecord::Base
 	def putts
 		if (tee.par_hole_10.blank?)  #9 hole
 			(1..9).each do |i|
-	   			current_hole = "putts_hole_" + i.to_s
-	   			if (send(current_hole).blank?)
-	   				errors.add(:base, "Must enter a putt score for all 9 holes.")
-	   				break
+				score_hole = "score_hole_" + i.to_s
+	   			putts_hole = "putts_hole_" + i.to_s
+	   			if (send(score_hole).blank? && !send(putts_hole).blank?)
+	   				errors.add(:base, "You can't enter putts for a hole with no score.")
+	   				return
 	   			end
+			end
+			front9_status = "Mixed"
+			if (putts_hole_1.blank? && putts_hole_2.blank? && putts_hole_3.blank? && putts_hole_4.blank? && putts_hole_5.blank? && putts_hole_6.blank? && putts_hole_7.blank? && putts_hole_8.blank? && putts_hole_9.blank?)
+				front9_status = "All Blank";
+			elsif (!putts_hole_1.blank? && !putts_hole_2.blank? && !putts_hole_3.blank? && !putts_hole_4.blank? && !putts_hole_5.blank? && !putts_hole_6.blank? && !putts_hole_7.blank? && !putts_hole_8.blank? && !putts_hole_9.blank?)
+				front9_status = "All Populated";
+			end
+
+			if (front9_status == "Mixed")
+				errors.add(:base, "You must enter all putts or none.")
+				return
 			end
 		else  #18 hole
 			(1..18).each do |i|
