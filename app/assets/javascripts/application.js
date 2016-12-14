@@ -81,8 +81,6 @@ ready = function() {
 				holeNum = inputId.slice(-2);
 			var nextHole = parseInt(holeNum) + 1;
 			var parValue = $(this).val();
-			console.log("nextHole:  " + nextHole);
-			console.log("parValue:  " + parValue);
 
 			if( parValue >= 3 && parValue <= 5)
 				if (nextHole < 19)
@@ -410,8 +408,11 @@ ready = function() {
 	//
 	//  On the charts page, load the google charts stuff.
 	//
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(drawCharts);
+	if (title == 'Statgolf Charts')
+	{
+	    google.charts.load('current', { 'packages': ['corechart'] });
+	    google.charts.setOnLoadCallback(drawCharts);
+    }
 
 
     // Callback that creates and populates a data table,
@@ -419,114 +420,88 @@ ready = function() {
     // draws it.
     function drawCharts() 
     {
-    	draw18HoleHistoryChart();
-    	draw9HoleHistoryChart();
+    	// draw18HoleHistoryChart();
+    	// draw9HoleHistoryChart();
+    	drawScoreHistoryChart(18);
+    	drawScoreHistoryChart(9);
     }
 
-    function draw18HoleHistoryChart()
-    {
-    	//
-    	// 18 hole score history
-    	//
-        var chartData = new google.visualization.DataTable();
-        chartData.addColumn('datetime', 'Date');
-        chartData.addColumn('number', 'Score');
-        chartData.addColumn({ type: 'string', role: 'tooltip', 'p': {'html': true} });
-		$.ajax({
-		    type: "GET",
-		    url: "/charts/get_recent_scores_18",
-		    dataType: "json",
-		    success: function(data){
-		    	if (data.length > 0)
-		    	{
-		    		console.log(data);
-			        for (i = 0; i < data.length; i++)
-			        {
-			        	// subtract 1 from month b/c js date uses zero based month for some stupid reason
-			        	var dt = new Date(data[i].year, data[i].month - 1, data[i].day);  
-			        	chartData.addRow([dt, data[i].total, genTooltip(dt, data[i].total, data[i].course)]);
-			        	// $('#tee_select_control').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
-			        }
-			        // Set chart options
-			        var options = {
-			            'title': '18 Hole Score History',
-			            tooltip: { isHtml: true },
-			            pointSize: 10,
-			            curveType: 'function',
-			            dataOpacity: 0.3,
-			            titleTextStyle: {
-					        fontSize: 24, // 12, 18 whatever you want (don't specify px)
-					        bold: false
-					    },
-					    chartArea:{left: 50, right: 100}
-			        };
-
-			        // Instantiate and draw our chart, passing in some options.
-			        var scoreHistoryChart = new google.visualization.LineChart(document.getElementById('score_history_chart_18_hole'));
-			        scoreHistoryChart.draw(chartData, options);
-		        }
-		    }        
-		});
-    }
-
-    function draw9HoleHistoryChart()
-    {
-    	//
-    	// 9 hole score history
-    	//
-        var chartData = new google.visualization.DataTable();
-        chartData.addColumn('datetime', 'Date');
-        chartData.addColumn('number', 'Score');
-        chartData.addColumn({ type: 'string', role: 'tooltip', 'p': {'html': true} });
-		$.ajax({
-		    type: "GET",
-		    url: "/charts/get_recent_scores_9",
-		    dataType: "json",
-		    success: function(data){
-		    	if (data.length > 0)
-		    	{
-		    		console.log(data);
-			        for (i = 0; i < data.length; i++)
-			        {
-			        	// subtract 1 from month b/c js date uses zero based month for some stupid reason
-			        	var dt = new Date(data[i].year, data[i].month - 1, data[i].day);  
-			        	chartData.addRow([dt, data[i].total, genTooltip(dt, data[i].total, data[i].course)]);
-			        	// $('#tee_select_control').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
-			        }
-			        // Set chart options
-			        var options = {
-			            'title': '9 Hole Score History',
-			            tooltip: { isHtml: true },
-			            pointSize: 10,
-			            curveType: 'function',
-			            dataOpacity: 0.3,
-			            titleTextStyle: {
-					        fontSize: 24, // 12, 18 whatever you want (don't specify px)
-					        bold: false
-					    },
-					    chartArea:{left: 50, right: 100}
-			        };
-
-			        // Instantiate and draw our chart, passing in some options.
-			        var scoreHistoryChart = new google.visualization.LineChart(document.getElementById('score_history_chart_9_hole'));
-			        scoreHistoryChart.draw(chartData, options);
-		        }
-		    }        
-		});
-    }
-
-    function genTooltip(dt, score, course )
-    {
-        var tooltip = '<div class="tool_tip">#_DATE_#<br>Score:  <b>#_SCORE_#</b><br>#_COURSE_#</div>';
-        tooltip = tooltip.replace('#_DATE_#', dt.toDateString());
-        tooltip = tooltip.replace('#_SCORE_#', score);
-        tooltip = tooltip.replace('#_COURSE_#', course);
-        return tooltip;
-    }
 };
 
 
 $(document).on('turbolinks:load', ready);
 
 
+function drawScoreHistoryChart(historyType)  // 9 or 18 holes
+{
+	var chartData = new google.visualization.DataTable();
+    chartData.addColumn('datetime', 'Date');
+    chartData.addColumn('number', 'Score');
+    chartData.addColumn({ type: 'string', role: 'tooltip', 'p': {'html': true} });
+    chartData.addColumn('number', 'id');
+	$.ajax({
+	    type: "GET",
+	    url: "/charts/get_recent_scores_" + historyType,
+	    dataType: "json",
+	    success: function(data){
+	    	if (data.length > 0)
+	    	{
+		        for (i = 0; i < data.length; i++)
+		        {
+		        	// subtract 1 from month b/c js date uses zero based month for some stupid reason
+		        	var dt = new Date(data[i].year, data[i].month - 1, data[i].day);  
+		        	chartData.addRow([dt, data[i].total, genTooltip(dt, data[i].total, data[i].course), data[i].id]);
+		        }
+		        // Set chart options
+		        var options = {
+		            'title': historyType + ' Hole Score History',
+		            tooltip: { isHtml: true },
+		            pointSize: 10,
+		            curveType: 'function',
+		            dataOpacity: 0.3,
+		            titleTextStyle: {
+				        fontSize: 24, // 12, 18 whatever you want (don't specify px)
+				        bold: false
+				    },
+				    chartArea:{left: 50, right: 100}
+		        };
+
+		       	// Create view from dataTable so can hide the id column, don't want to display it
+		        var view = new google.visualization.DataView(chartData);
+    			view.setColumns([0, 1, 2]);
+
+		        // Instantiate and draw our chart, passing in some options.
+		        var scoreHistoryChart = new google.visualization.LineChart(document.getElementById('score_history_chart_' + historyType + '_hole'));
+		        scoreHistoryChart.draw(view, options);
+
+		        var selectHandler = function(e) {
+		        	if (scoreHistoryChart.getSelection().length > 0)
+		        	{
+			        	var item = scoreHistoryChart.getSelection()[0];
+			        	if (item.row != null && item.column != null) {
+      						score_id = chartData.getValue(scoreHistoryChart.getSelection()[0]['row'], 3 )
+      						window.location.href = 'scores/' + score_id + '/edit';
+      					}
+  					}
+		        }
+
+		        // Add our selection handler.
+		        google.visualization.events.addListener(scoreHistoryChart, 'select', selectHandler);
+	        }
+	    }        
+	});
+}
+    
+
+
+
+
+function genTooltip(dt, score, course )
+{
+    var tooltip = '<div class="tool_tip">#_DATE_#<br>Score:  <b>#_SCORE_#</b><br>#_COURSE_#</div>';
+    tooltip = tooltip.replace('#_DATE_#', dt.toDateString());
+    tooltip = tooltip.replace('#_SCORE_#', score);
+    tooltip = tooltip.replace('#_COURSE_#', course);
+    return tooltip;
+}
 

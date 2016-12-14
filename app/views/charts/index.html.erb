@@ -2,26 +2,6 @@
 <%content_for :page_header do%>Charts<%end%>
 
 
-<div id="garth_test"></div>
 <div id="score_history_chart_18_hole"></div>
 <div id="score_history_chart_9_hole"></div>
 
-<table class="table table-striped"> 
-	<thead> 
-		<tr>
-			<th>Date</th> 
-			<th>Course</th> 
-			<th>Score</th>  
-		</tr> 
-	</thead> 
-	<tbody> 
-		<% @scores.each do |score| %>
-			<tr>
-				<!-- <td><%= score.date_played.strftime("%b %d, %Y") %></td> -->
-				<td><%= "%s %s, %s" % [score.date_played.strftime("%b"), score.date_played.day.ordinalize, score.date_played.year] %></td>
-				<td><%= score.tee.course.name %> <small>(<%= score.tee.name %>)</small></td> 
-				<td><%= link_to score.total, edit_score_path(score.id) %></td> 
-			</tr>
-		<% end %>
-	</tbody> 
-</table>
