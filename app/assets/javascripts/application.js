@@ -424,6 +424,7 @@ ready = function() {
     	// draw9HoleHistoryChart();
     	drawScoreHistoryChart(18);
     	drawScoreHistoryChart(9);
+    	drawAveragePuttsPerGreenPerRoundChart();
     }
 
 };
@@ -450,7 +451,7 @@ function drawScoreHistoryChart(historyType)  // 9 or 18 holes
 		        {
 		        	// subtract 1 from month b/c js date uses zero based month for some stupid reason
 		        	var dt = new Date(data[i].year, data[i].month - 1, data[i].day);  
-		        	chartData.addRow([dt, data[i].total, genTooltip(dt, data[i].total, data[i].course), data[i].id]);
+		        	chartData.addRow([dt, data[i].total, genToolTip(dt, data[i].total, data[i].course), data[i].id]);
 		        }
 		        // Set chart options
 		        var options = {
@@ -491,16 +492,88 @@ function drawScoreHistoryChart(historyType)  // 9 or 18 holes
 	    }        
 	});
 }
+
+
+function drawAveragePuttsPerGreenPerRoundChart()
+{
+	var chartData = new google.visualization.DataTable();
+    chartData.addColumn('datetime', 'Date');
+    chartData.addColumn('number', 'Avg Putts');
+    chartData.addColumn({ type: 'string', role: 'tooltip', 'p': {'html': true} });
+    chartData.addColumn('number', 'id');
+	$.ajax({
+	    type: "GET",
+	    url: "/charts/get_average_putts_per_green_per_round",
+	    dataType: "json",
+	    success: function(data){
+	    	if (data.length > 0)
+	    	{
+		        for (i = 0; i < data.length; i++)
+		        {
+		        	// subtract 1 from month b/c js date uses zero based month for some stupid reason
+		        	var dt = new Date(data[i].year, data[i].month - 1, data[i].day);  
+		        	chartData.addRow([dt, data[i].avg_putts_per_green, genToolTip(dt, data[i].total, data[i].avg_putts_per_green, data[i].course), data[i].id]);
+		        }
+		        // Set chart options
+		        var options = {
+		            'title': 'Average Putts per Green per Round',
+		            tooltip: { isHtml: true },
+		            pointSize: 10,
+		            curveType: 'function',
+		            dataOpacity: 0.3,
+		            titleTextStyle: {
+				        fontSize: 24, // 12, 18 whatever you want (don't specify px)
+				        bold: false
+				    },
+				    chartArea:{left: 50, right: 100},
+				    interpolateNulls: true
+		        };
+
+		       	// Create view from dataTable so can hide the id column, don't want to display it
+		        var view = new google.visualization.DataView(chartData);
+    			view.setColumns([0, 1, 2]);
+
+		        // Instantiate and draw our chart, passing in some options.
+		        var avgPuttsChart = new google.visualization.LineChart(document.getElementById('average_putts_per_green_per_round'));
+		        avgPuttsChart.draw(view, options);
+
+		        var selectHandler = function(e) {
+		        	if (avgPuttsChart.getSelection().length > 0)
+		        	{
+			        	var item = avgPuttsChart.getSelection()[0];
+			        	if (item.row != null && item.column != null) {
+      						score_id = chartData.getValue(avgPuttsChart.getSelection()[0]['row'], 3 )
+      						window.location.href = 'scores/' + score_id + '/edit';
+      					}
+  					}
+		        }
+
+		        // Add our selection handler.
+		        google.visualization.events.addListener(avgPuttsChart, 'select', selectHandler);
+	        }
+	    }        
+	});	
+}
     
 
 
 
 
-function genTooltip(dt, score, course )
+function genToolTip(dt, score, course )
 {
     var tooltip = '<div class="tool_tip">#_DATE_#<br>Score:  <b>#_SCORE_#</b><br>#_COURSE_#</div>';
     tooltip = tooltip.replace('#_DATE_#', dt.toDateString());
     tooltip = tooltip.replace('#_SCORE_#', score);
+    tooltip = tooltip.replace('#_COURSE_#', course);
+    return tooltip;
+}
+
+function genToolTipPuttAvg(dt, score, puttAvg, course )
+{
+    var tooltip = '<div class="tool_tip">#_DATE_#<br>Score:  <b>#_SCORE_#</b><br>Putt Avg:  <b>#_PUTT_AVG_#</b><br>#_COURSE_#</div>';
+    tooltip = tooltip.replace('#_DATE_#', dt.toDateString());
+    tooltip = tooltip.replace('#_SCORE_#', score);
+    tooltip = tooltip.replace('#_PUTT_AVG_#', score);
     tooltip = tooltip.replace('#_COURSE_#', course);
     return tooltip;
 }

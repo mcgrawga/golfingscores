@@ -12,6 +12,13 @@
 	height: 300px;
 }
 
+#average_putts_per_green_per_round{
+	/*border-style: solid;
+	border-color: red;*/
+	width: 1000px;
+	height: 300px;	
+}
+
 .tool_tip{
 /*	border-style: solid;
 	border-color: red;*/
