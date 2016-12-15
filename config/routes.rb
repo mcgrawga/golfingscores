@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get 'charts/get_recent_scores_18' => 'charts#get_recent_scores_18'
   get 'charts/get_recent_scores_9' => 'charts#get_recent_scores_9'  
   get 'charts/get_average_putts_per_green_per_round' => 'charts#get_average_putts_per_green_per_round'
+  get 'charts/tablulate_putts' => 'charts#tablulate_putts'
   resources :scores
   get 'scores/get_tees_for_course/:id' => 'scores#get_tees_for_course'
   get 'scores/get_tee/:id' => 'scores#get_tee'

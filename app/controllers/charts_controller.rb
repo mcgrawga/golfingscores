@@ -8,6 +8,15 @@ class SingleScore
 	attr_accessor :avg_putts_per_green
 end
 
+class PuttsTabulation
+	attr_accessor :zero
+	attr_accessor :one
+	attr_accessor :two
+	attr_accessor :three
+	attr_accessor :four
+	attr_accessor :other
+end
+
 
 class ChartsController < ApplicationController
 	before_filter :check_for_login
@@ -94,4 +103,40 @@ class ChartsController < ApplicationController
 		end
 		render json: @recentScores		
 	end
+
+	def tablulate_putts
+		@PuttsTabulation = PuttsTabulation.new
+		@scores = Score.joins("INNER JOIN tees ON tees.id = scores.tee_id INNER JOIN courses ON courses.id = tees.course_id and courses.user_id = %s" % current_user.id.to_s).order(date_played: :desc)
+		num_scores_to_list = 20		#Number of scores you want to list in recent scores graph maximum
+		num_scores_listed = 0
+		@scores.each do |s|
+			(1..18).each do |i|
+				putt_score = s.send("putts_hole_" + i.to_s)
+				if ( putt_score == 0)
+					@PuttsTabulation.zero = @PuttsTabulation.zero + 1
+				elsif (putt_score == 1)
+					@PuttsTabulation.one = @PuttsTabulation.one + 1
+				elsif (putt_score == 2)
+					@PuttsTabulation.two = @PuttsTabulation.two + 1
+				elsif (putt_score == 3)
+					@PuttsTabulation.three = @PuttsTabulation.three + 1
+				elsif (putt_score == 4)
+					@PuttsTabulation.four = @PuttsTabulation.four + 1
+				elsif (putt_score > 4)
+					@PuttsTabulation.other = @PuttsTabulation.other + 1
+			end
+		end
+		render json: @PuttsTabulation		
+	end
+
+# 	class PuttsTabulation
+# 	attr_accessor :zero
+# 	attr_accessor :one
+# 	attr_accessor :two
+# 	attr_accessor :three
+# 	attr_accessor :four
+# 	attr_accessor :other
+# end
+
+
 end
