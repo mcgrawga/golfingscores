@@ -425,6 +425,9 @@ ready = function() {
     	drawScoreHistoryChart(18);
     	drawScoreHistoryChart(9);
     	drawAveragePuttsPerGreenPerRoundChart();
+    	drawPuttDistributionChart();
+    	drawPuttDistributionPieChart();
+    	drawGIRPieChart();
     }
 
 };
@@ -481,7 +484,7 @@ function drawScoreHistoryChart(historyType)  // 9 or 18 holes
 			        	var item = scoreHistoryChart.getSelection()[0];
 			        	if (item.row != null && item.column != null) {
       						score_id = chartData.getValue(scoreHistoryChart.getSelection()[0]['row'], 3 )
-      						window.location.href = 'scores/' + score_id + '/edit';
+      						window.location.href = '/scores/' + score_id + '/edit';
       					}
   					}
 		        }
@@ -512,7 +515,7 @@ function drawAveragePuttsPerGreenPerRoundChart()
 		        {
 		        	// subtract 1 from month b/c js date uses zero based month for some stupid reason
 		        	var dt = new Date(data[i].year, data[i].month - 1, data[i].day);  
-		        	chartData.addRow([dt, data[i].avg_putts_per_green, genToolTip(dt, data[i].total, data[i].avg_putts_per_green, data[i].course), data[i].id]);
+		        	chartData.addRow([dt, data[i].avg_putts_per_green, genToolTipPuttAvg(dt, data[i].total, data[i].avg_putts_per_green, data[i].course), data[i].id]);
 		        }
 		        // Set chart options
 		        var options = {
@@ -543,7 +546,7 @@ function drawAveragePuttsPerGreenPerRoundChart()
 			        	var item = avgPuttsChart.getSelection()[0];
 			        	if (item.row != null && item.column != null) {
       						score_id = chartData.getValue(avgPuttsChart.getSelection()[0]['row'], 3 )
-      						window.location.href = 'scores/' + score_id + '/edit';
+      						window.location.href = '/scores/' + score_id + '/edit';
       					}
   					}
 		        }
@@ -554,7 +557,133 @@ function drawAveragePuttsPerGreenPerRoundChart()
 	    }        
 	});	
 }
-    
+ 
+
+
+function drawPuttDistributionChart()
+{
+	var chartData = new google.visualization.DataTable();
+    chartData.addColumn('string', 'Number of Putts');
+    chartData.addColumn('number', 'How many times');
+	$.ajax({
+	    type: "GET",
+	    url: "/charts/putt_distribution",
+	    dataType: "json",
+	    success: function(data){
+	    	if (data != null)
+	    	{
+	        	chartData.addRow(['Zero Putts', data.zero]);
+	        	chartData.addRow(['One Putt', data.one]);
+	        	chartData.addRow(['Two Putts', data.two]);
+	        	chartData.addRow(['Three Putts', data.three]);
+	        	chartData.addRow(['Four Putts', data.four]);
+	        	chartData.addRow(['More than Four', data.other]);
+
+		        // Set chart options
+		        var options = {
+		            'title': 'Putt Distribution (how many 2 putts, how many 3 putts, etc.)',
+		            tooltip: { isHtml: true },
+		            // pointSize: 10,
+		            // curveType: 'function',
+		            dataOpacity: 0.3,
+		            titleTextStyle: {
+				        fontSize: 24, // 12, 18 whatever you want (don't specify px)
+				        bold: false
+				    },
+				    chartArea:{left: 50, right: 100}
+				    // interpolateNulls: true
+		        };
+
+		        // Instantiate and draw our chart, passing in some options.
+		        var puttDistributionChart = new google.visualization.ColumnChart(document.getElementById('putt_distribution_column_chart'));
+		        puttDistributionChart.draw(chartData, options);
+	        }
+	    }        
+	});	
+}   
+
+
+
+function drawPuttDistributionPieChart()
+{
+	var chartData = new google.visualization.DataTable();
+    chartData.addColumn('string', 'Number of Putts');
+    chartData.addColumn('number', 'How many times');
+	$.ajax({
+	    type: "GET",
+	    url: "/charts/putt_distribution",
+	    dataType: "json",
+	    success: function(data){
+	    	if (data != null)
+	    	{
+	    		var oneOrLess = data.zero + data.one;
+	    		var threeOrMore = data.three + data.four + data.other;
+	        	chartData.addRow(['One or Less Putts', oneOrLess]);
+	        	chartData.addRow(['Two Putts', data.two]);
+	        	chartData.addRow(['Three or More Putts', threeOrMore]);
+
+		        // Set chart options
+		        var options = {
+		            'title': 'Putt Distribution %',
+		            tooltip: { isHtml: true },
+		            // pointSize: 10,
+		            // curveType: 'function',
+		            dataOpacity: 0.3,
+		            titleTextStyle: {
+				        fontSize: 24, // 12, 18 whatever you want (don't specify px)
+				        bold: false
+				    },
+				    chartArea:{left: 50, right: 100}
+				    // interpolateNulls: true
+		        };
+
+		        // Instantiate and draw our chart, passing in some options.
+		        var puttDistributionChart = new google.visualization.PieChart(document.getElementById('putt_distribution_pie_chart'));
+		        puttDistributionChart.draw(chartData, options);
+	        }
+	    }        
+	});	
+}   
+
+
+
+function drawGIRPieChart()
+{
+	var chartData = new google.visualization.DataTable();
+    chartData.addColumn('string', 'Number of Putts');
+    chartData.addColumn('number', 'How many times');
+	$.ajax({
+	    type: "GET",
+	    url: "/charts/gir",
+	    dataType: "json",
+	    success: function(data){
+	    	if (data != null)
+	    	{
+	        	chartData.addRow(['Greens not in Regulation', data.greensNotInRegulation]);
+	        	chartData.addRow(['Greens in Regulation', data.greensInRegulation]);
+
+		        // Set chart options
+		        var options = {
+		            'title': 'Greens in Regulation %',
+		            tooltip: { isHtml: true },
+		            // pointSize: 10,
+		            // curveType: 'function',
+		            dataOpacity: 0.3,
+		            titleTextStyle: {
+				        fontSize: 24, // 12, 18 whatever you want (don't specify px)
+				        bold: false
+				    },
+				    chartArea:{left: 50, right: 100}
+				    // interpolateNulls: true
+		        };
+
+		        // Instantiate and draw our chart, passing in some options.
+		        var girChart = new google.visualization.PieChart(document.getElementById('gir_pie_chart'));
+		        girChart.draw(chartData, options);
+	        }
+	    }        
+	});	
+}   
 
 
 
@@ -573,7 +702,7 @@ function genToolTipPuttAvg(dt, score, puttAvg, course )
     var tooltip = '<div class="tool_tip">#_DATE_#<br>Score:  <b>#_SCORE_#</b><br>Putt Avg:  <b>#_PUTT_AVG_#</b><br>#_COURSE_#</div>';
     tooltip = tooltip.replace('#_DATE_#', dt.toDateString());
     tooltip = tooltip.replace('#_SCORE_#', score);
-    tooltip = tooltip.replace('#_PUTT_AVG_#', score);
+    tooltip = tooltip.replace('#_PUTT_AVG_#', puttAvg);
     tooltip = tooltip.replace('#_COURSE_#', course);
     return tooltip;
 }

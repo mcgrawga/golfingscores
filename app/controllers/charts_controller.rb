@@ -8,13 +8,18 @@ class SingleScore
 	attr_accessor :avg_putts_per_green
 end
 
-class PuttsTabulation
+class PuttDistribution
 	attr_accessor :zero
 	attr_accessor :one
 	attr_accessor :two
 	attr_accessor :three
 	attr_accessor :four
 	attr_accessor :other
+end
+
+class GreensInRegulation
+	attr_accessor :greensInRegulation
+	attr_accessor :greensNotInRegulation
 end
 
 
@@ -104,39 +109,57 @@ class ChartsController < ApplicationController
 		render json: @recentScores		
 	end
 
-	def tablulate_putts
-		@PuttsTabulation = PuttsTabulation.new
+	def putt_distribution
+		@PuttDistribution = PuttDistribution.new
+		@PuttDistribution.zero = 0
+		@PuttDistribution.one = 0
+		@PuttDistribution.two = 0
+		@PuttDistribution.three = 0
+		@PuttDistribution.four = 0
+		@PuttDistribution.other = 0
 		@scores = Score.joins("INNER JOIN tees ON tees.id = scores.tee_id INNER JOIN courses ON courses.id = tees.course_id and courses.user_id = %s" % current_user.id.to_s).order(date_played: :desc)
 		num_scores_to_list = 20		#Number of scores you want to list in recent scores graph maximum
 		num_scores_listed = 0
 		@scores.each do |s|
 			(1..18).each do |i|
 				putt_score = s.send("putts_hole_" + i.to_s)
-				if ( putt_score == 0)
-					@PuttsTabulation.zero = @PuttsTabulation.zero + 1
-				elsif (putt_score == 1)
-					@PuttsTabulation.one = @PuttsTabulation.one + 1
-				elsif (putt_score == 2)
-					@PuttsTabulation.two = @PuttsTabulation.two + 1
-				elsif (putt_score == 3)
-					@PuttsTabulation.three = @PuttsTabulation.three + 1
-				elsif (putt_score == 4)
-					@PuttsTabulation.four = @PuttsTabulation.four + 1
-				elsif (putt_score > 4)
-					@PuttsTabulation.other = @PuttsTabulation.other + 1
+				if (!putt_score.blank?)
+					if ( putt_score == 0)
+						@PuttDistribution.zero = @PuttDistribution.zero + 1
+					elsif (putt_score == 1)
+						@PuttDistribution.one = @PuttDistribution.one + 1
+					elsif (putt_score == 2)
+						@PuttDistribution.two = @PuttDistribution.two + 1
+					elsif (putt_score == 3)
+						@PuttDistribution.three = @PuttDistribution.three + 1
+					elsif (putt_score == 4)
+						@PuttDistribution.four = @PuttDistribution.four + 1
+					elsif (putt_score > 4)
+						@PuttDistribution.other = @PuttDistribution.other + 1
+					end
+				end
 			end
 		end
-		render json: @PuttsTabulation		
+		render json: @PuttDistribution		
 	end
 
-# 	class PuttsTabulation
-# 	attr_accessor :zero
-# 	attr_accessor :one
-# 	attr_accessor :two
-# 	attr_accessor :three
-# 	attr_accessor :four
-# 	attr_accessor :other
-# end
-
-
+	def gir
+		@GreensInRegulation = GreensInRegulation.new
+		@GreensInRegulation.greensInRegulation = 0
+		@GreensInRegulation.greensNotInRegulation = 0
+		@scores = Score.joins("INNER JOIN tees ON tees.id = scores.tee_id INNER JOIN courses ON courses.id = tees.course_id and courses.user_id = %s" % current_user.id.to_s).order(date_played: :desc)
+		num_scores_to_list = 20		#Number of scores you want to list in recent scores graph maximum
+		num_scores_listed = 0
+		@scores.each do |s|
+			if (!s.greens_in_regulation.blank?)
+				@GreensInRegulation.greensInRegulation = @GreensInRegulation.greensInRegulation + s.greens_in_regulation
+				if (s.nine_or_eighteen_hole_score == 18)
+					@GreensInRegulation.greensNotInRegulation = (18 - s.greens_in_regulation)
+				elsif (s.nine_or_eighteen_hole_score == 9)
+					@GreensInRegulation.greensNotInRegulation = (9 - s.greens_in_regulation)
+				end
+			end
+		end
+		render json: @GreensInRegulation		
+	end
 end

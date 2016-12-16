@@ -19,6 +19,24 @@
 	height: 300px;	
 }
 
+#putt_distribution_column_chart{
+	/*border-style: solid;
+	border-color: red;*/
+	width: 1000px;
+	height: 300px;	
+}
+#putt_distribution_pie_chart{
+	/*border-style: solid;
+	border-color: red;*/
+	width: 500px;
+	height: 300px;	
+}
+#gir_pie_chart{
+	/*border-style: solid;
+	border-color: red;*/
+	width: 500px;
+	height: 300px;	
+}
 .tool_tip{
 /*	border-style: solid;
 	border-color: red;*/
