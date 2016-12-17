@@ -13,8 +13,12 @@ class ScoresController < ApplicationController
 				scoreSum = scoreSum + s.total
 			end
 		end
-		avgScore = scoreSum / @scores.length
-		@handicap = ((avgScore - 72) * 0.96 * -1).round(1) 
+		if (@scores.length > 0)
+			avgScore = scoreSum / @scores.length
+			@handicap = ((avgScore - 72) * 0.96 * -1).round(1) 
+		else
+			@handicap = 'N/A' 
+		end
 	end
 
 	def new
