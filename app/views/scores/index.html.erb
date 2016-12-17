@@ -1,19 +1,18 @@
 <%content_for :page_title do%>Scores<%end%>
 <%content_for :page_header do%>Scores<%end%>
-<%= link_to 'Add a Score', new_score_path, class: "add_course_link" %>
-
-
+<div id="HandiDiv" style="float: right;">
+	<div id="Handicap_Label">Handicap</div> 
+	<div id="Handicap_Score"><%= @handicap %></div>
+</div>
 <div class="clear_float"></div>
 
 
+<%= link_to 'Add a Score', new_score_path, class: "add_course_link" %>
+<div class="clear_float"></div>
+
+
+
 <table class="table table-striped"> 
-	<thead> 
-		<tr>
-			<th>Date</th> 
-			<th>Course</th> 
-			<th>Score</th>  
-		</tr> 
-	</thead> 
 	<tbody> 
 		<% @scores.each do |score| %>
 			<tr>

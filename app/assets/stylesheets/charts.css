@@ -37,6 +37,12 @@
 	width: 500px;
 	height: 300px;	
 }
+#fairways_hit_pie_chart{
+	/*border-style: solid;
+	border-color: red;*/
+	width: 500px;
+	height: 300px;	
+}
 .tool_tip{
 /*	border-style: solid;
 	border-color: red;*/

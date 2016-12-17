@@ -22,3 +22,27 @@
 .delete_score_link {
 	float: right;
 }
+
+#HandiDiv{
+	border-style: solid;
+	border-width: 1px;
+	border-color: gray;
+	width: 125px;
+	border-radius: 15px;
+	margin-top: 35px;
+}
+
+#Handicap_Label{
+	background-color: lightblue;	
+	text-align: center;
+	font-size: 1.5em;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+}
+
+#Handicap_Score{
+	text-align: center;
+	font-size: 2em;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}

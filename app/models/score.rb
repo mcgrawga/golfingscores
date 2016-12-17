@@ -100,7 +100,7 @@ class Score < ActiveRecord::Base
 	   				return
 	   			end
 			end
-			
+
 			if (putts_hole_1.blank? && putts_hole_2.blank? && putts_hole_3.blank? && putts_hole_4.blank? && putts_hole_5.blank? && putts_hole_6.blank? && putts_hole_7.blank? && putts_hole_8.blank? && putts_hole_9.blank?)
 				return
 			elsif (!putts_hole_1.blank? && !putts_hole_2.blank? && !putts_hole_3.blank? && !putts_hole_4.blank? && !putts_hole_5.blank? && !putts_hole_6.blank? && !putts_hole_7.blank? && !putts_hole_8.blank? && !putts_hole_9.blank?)
@@ -190,6 +190,20 @@ class Score < ActiveRecord::Base
 		else
 			return 9
 		end
+  	end
+
+  	def total_fairways_possible_to_hit
+		total = 0
+		(1..18).each do |i|
+   			score_hole = "score_hole_" + i.to_s
+   			if (!send(score_hole).blank?)
+   				par_hole = "par_hole_" + i.to_s
+   				if (tee.send(par_hole) > 3)
+   					total = total + 1
+   				end
+   			end
+		end
+		total
   	end
 
 end

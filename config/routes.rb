@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'charts/get_average_putts_per_green_per_round' => 'charts#get_average_putts_per_green_per_round'
   get 'charts/putt_distribution' => 'charts#putt_distribution'
   get 'charts/gir' => 'charts#gir'
+  get 'charts/fairways_hit' => 'charts#fairways_hit'
   resources :scores
   get 'scores/get_tees_for_course/:id' => 'scores#get_tees_for_course'
   get 'scores/get_tee/:id' => 'scores#get_tee'

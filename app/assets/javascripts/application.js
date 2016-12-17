@@ -393,7 +393,6 @@ ready = function() {
 	//
 	//  On the edit tee page, hide back 9 if it is a 9 hole tee.
 	//
-	var title = $(document).attr('title');
 	if (title == 'Statgolf Edit Tee')
 	{
 		// hide back 9 if it is only a 9 hole tee
@@ -403,6 +402,14 @@ ready = function() {
 			$("#back_9_par_nums").hide();
 		}
 	}
+
+
+	//
+	//  On scores page, muck with some CSS so the handicap displays correctly.
+	//
+	if (title == 'Statgolf Scores')
+    	$(".page-header").attr("style", "width: 75%; float: left;");
+
 
 
 	//
@@ -428,6 +435,7 @@ ready = function() {
     	drawPuttDistributionChart();
     	drawPuttDistributionPieChart();
     	drawGIRPieChart();
+    	drawFairwaysHitPieChart();
     }
 
 };
@@ -624,7 +632,7 @@ function drawPuttDistributionPieChart()
 
 		        // Set chart options
 		        var options = {
-		            'title': 'Putt Distribution %',
+		            'title': 'Putt Distribution',
 		            tooltip: { isHtml: true },
 		            // pointSize: 10,
 		            // curveType: 'function',
@@ -659,12 +667,12 @@ function drawGIRPieChart()
 	    success: function(data){
 	    	if (data != null)
 	    	{
+	    		chartData.addRow(['Greens in Regulation', data.greensInRegulation]);
 	        	chartData.addRow(['Greens not in Regulation', data.greensNotInRegulation]);
-	        	chartData.addRow(['Greens in Regulation', data.greensInRegulation]);
 
 		        // Set chart options
 		        var options = {
-		            'title': 'Greens in Regulation %',
+		            'title': 'Greens in Regulation',
 		            tooltip: { isHtml: true },
 		            // pointSize: 10,
 		            // curveType: 'function',
@@ -679,6 +687,48 @@ function drawGIRPieChart()
 
 		        // Instantiate and draw our chart, passing in some options.
 		        var girChart = new google.visualization.PieChart(document.getElementById('gir_pie_chart'));
+		        girChart.draw(chartData, options);
+	        }
+	    }        
+	});	
+}   
+
+
+
+
+function drawFairwaysHitPieChart()
+{
+	var chartData = new google.visualization.DataTable();
+    chartData.addColumn('string', 'Fairways Hit');
+    chartData.addColumn('number', 'How many times');
+	$.ajax({
+	    type: "GET",
+	    url: "/charts/fairways_hit",
+	    dataType: "json",
+	    success: function(data){
+	    	if (data != null)
+	    	{
+	    		console.log(data);
+	        	chartData.addRow(['Fairways Hit', data.hit]);
+	        	chartData.addRow(['Fairways Missed', data.missed]);
+
+		        // Set chart options
+		        var options = {
+		            'title': 'Fairways Hit',
+		            tooltip: { isHtml: true },
+		            // pointSize: 10,
+		            // curveType: 'function',
+		            dataOpacity: 0.3,
+		            titleTextStyle: {
+				        fontSize: 24, // 12, 18 whatever you want (don't specify px)
+				        bold: false
+				    },
+				    chartArea:{left: 50, right: 100}
+				    // interpolateNulls: true
+		        };
+
+		        // Instantiate and draw our chart, passing in some options.
+		        var girChart = new google.visualization.PieChart(document.getElementById('fairways_hit_pie_chart'));
 		        girChart.draw(chartData, options);
 	        }
 	    }        

@@ -22,6 +22,11 @@ class GreensInRegulation
 	attr_accessor :greensNotInRegulation
 end
 
+class FairwaysHit
+	attr_accessor :hit
+	attr_accessor :missed
+end
+
 
 class ChartsController < ApplicationController
 	before_filter :check_for_login
@@ -162,4 +167,23 @@ class ChartsController < ApplicationController
 		end
 		render json: @GreensInRegulation		
 	end
+
+
+	def fairways_hit
+		@FairwaysHit = FairwaysHit.new
+		@FairwaysHit.hit = 0
+		@FairwaysHit.missed = 0
+		@scores = Score.joins("INNER JOIN tees ON tees.id = scores.tee_id INNER JOIN courses ON courses.id = tees.course_id and courses.user_id = %s" % current_user.id.to_s).order(date_played: :desc)
+		num_scores_to_list = 20		#Number of scores you want to list in recent scores graph maximum
+		num_scores_listed = 0
+		@scores.each do |s|
+			if (!s.fairways_hit.blank?)
+				@FairwaysHit.hit = @FairwaysHit.hit + s.fairways_hit
+				@FairwaysHit.missed = @FairwaysHit.missed + (s.total_fairways_possible_to_hit - s.fairways_hit)
+			end
+		end
+		render json: @FairwaysHit		
+	end
+
+
 end

@@ -5,6 +5,16 @@ class ScoresController < ApplicationController
 	def index
 		@scores = Score.joins("INNER JOIN tees ON tees.id = scores.tee_id INNER JOIN courses ON courses.id = tees.course_id and courses.user_id = %s" % current_user.id.to_s).order(date_played: :desc)
 		log("Userid:  %s" %  current_user.id.to_s)
+		scoreSum = 0
+		@scores.each do |s|
+			if (s.nine_or_eighteen_hole_score == 9)
+				scoreSum = scoreSum + (s.total * 2)
+			else
+				scoreSum = scoreSum + s.total
+			end
+		end
+		avgScore = scoreSum / @scores.length
+		@handicap = ((avgScore - 72) * 0.96 * -1).round(1) 
 	end
 
 	def new
