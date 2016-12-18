@@ -6,6 +6,7 @@ class SingleScore
 	attr_accessor :total
 	attr_accessor :course
 	attr_accessor :avg_putts_per_green
+	attr_accessor :penalties_per_nine
 end
 
 class PuttDistribution
@@ -183,6 +184,36 @@ class ChartsController < ApplicationController
 			end
 		end
 		render json: @FairwaysHit		
+	end
+
+	def penalties_per_nine
+		@recentScores = Array.new
+		@scores = Score.joins("INNER JOIN tees ON tees.id = scores.tee_id INNER JOIN courses ON courses.id = tees.course_id and courses.user_id = %s" % current_user.id.to_s).order(date_played: :desc)
+		num_scores_to_list = 20		#Number of scores you want to list in recent scores graph maximum
+		num_scores_listed = 0
+		@scores.each do |s|
+			@score = SingleScore.new
+			@score.id = s.id
+			@score.day = s.date_played.day
+			@score.month = s.date_played.month
+			@score.year = s.date_played.year
+			@score.total = s.total
+			@score.course = s.tee.course.name
+			@score.course = @score.course + "  (" + s.tee.name + ")"
+			if (!s.penalties.blank?)
+				if (s.nine_or_eighteen_hole_score == 9)
+					@score.penalties_per_nine = s.penalties
+				else (s.nine_or_eighteen_hole_score == 18)
+					@score.penalties_per_nine = (s.penalties.to_f / 2).round(1);
+				end
+				@recentScores.push(@score)
+			end
+			num_scores_listed = num_scores_listed + 1
+			if (num_scores_listed >= num_scores_to_list)
+				break
+			end
+		end
+		render json: @recentScores		
 	end
 
 

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get 'charts/putt_distribution' => 'charts#putt_distribution'
   get 'charts/gir' => 'charts#gir'
   get 'charts/fairways_hit' => 'charts#fairways_hit'
+  get 'charts/penalties_per_nine' => 'charts#penalties_per_nine'
   resources :scores
   get 'scores/get_tees_for_course/:id' => 'scores#get_tees_for_course'
   get 'scores/get_tee/:id' => 'scores#get_tee'
