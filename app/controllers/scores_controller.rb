@@ -127,7 +127,8 @@ class ScoresController < ApplicationController
 							:greens_in_regulation,
 							:penalties,
 							:date_played,
-							:tee_id
+							:tee_id,
+							:notes
 							)
   	end
 end
