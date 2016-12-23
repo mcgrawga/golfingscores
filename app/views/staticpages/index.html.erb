@@ -1,54 +1,114 @@
-<%content_for :page_header do%>Statgolf.com<%end%>
+<%content_for :page_header do%>Golfingscores.com<%end%>
+<ul class="homepage_list">
+	<li>Record all your golf scores forever.</li>
+	<li>Know your handicap.</li>
+	<li>Record putts, fairways, penalties, greens in regualtion.</li>
+	<li>Use interactive graphs to improve your game.</li>
+	<li>Free 90 day trial.</li>
+</ul>
 
-<h3>Record all your golf scores forever.</h3>
-<h3>Know your handicap.</h3>
-<h3>Record putts, fairways, penalties, greens in regualtion, ...</h3>
-<h3>Get cool graphs to improve your game.</h3>
-<h3>Starting at $4.99 per year.</h3>
+
 
 <div id="plans">
-	<div class="plan" id="Statgolf_Duffer_Plan">
-		<div class="plan_header">
-			<h3>Duffer</h3>
-		</div>
-		<div class="plan_content">
-			<div class="plan_details">
-				<div class="plan_price">$4.99</div>
-				<div class="per_year">per year</div>
-				<div class="third_line">Unlimited Scores</div>
-				<div class="fourth_line">Your Handicap</div>
-			</div>
-			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Statgolf Duffer"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
-		</div>
-	</div>
-	<div class="plan" id="Statgolf_Amateur_Plan">
+	<div class="plan" id="Amateur_Plan">
 		<div class="plan_header">
 			<h3>Amateur</h3>
 		</div>
 		<div class="plan_content">
-			<div class="plan_details">
-				<div class="plan_price">$8.99</div>
-				<div class="per_year">per year</div>
-				<div class="third_line">Duffer +</div>
-				<div class="fourth_line">Putts per green</div>
+			<div class="plan_top">
+				<div class="plan_price">$5</div>
+				<div class="per_year">per month</div>
 			</div>
-			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Statgolf Amateur"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+			<div class="plan_features">
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Unlimited scores</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Current handicap</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Putts per green</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Penalties per round</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Fairways hit</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Greens in regulation</span>
+				</div>
+			</div>
+			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Statgolf Duffer"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
 		</div>
 	</div>
-	<div class="plan" id="Statgolf_Professional_Plan">
+
+	<div class="plan" id="Club_Plan">
 		<div class="plan_header">
-			<h3>Professional</h3>
+			<h3>Club</h3>
 		</div>
 		<div class="plan_content">
-			<div class="plan_details">
-				<div class="plan_price">$12.99</div>
-				<div class="per_year">per year</div>
-				<div class="third_line">Amateur +</div>
-				<div class="fourth_line">Penalties, Fairways, Greens in Regulation</div>
+			<div class="plan_top">
+				<div class="plan_price">$7</div>
+				<div class="per_year">per month</div>
 			</div>
-			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Statgolf Professional"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+			<div class="plan_features">
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Unlimited scores</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Current handicap</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Putts per green</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Penalties per round</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Fairways hit</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Greens in regulation</span>
+				</div>
+			</div>
+			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Statgolf Duffer"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
 		</div>
 	</div>
+
+	<div class="plan" id="Pro_Plan">
+		<div class="plan_header">
+			<h3>Pro</h3>
+		</div>
+		<div class="plan_content">
+			<div class="plan_top">
+				<div class="plan_price">$9</div>
+				<div class="per_year">per month</div>
+			</div>
+			<div class="plan_features">
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Unlimited scores</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Current handicap</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Putts per green</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Penalties per round</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Fairways hit</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Greens in regulation</span>
+				</div>
+			</div>
+			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Statgolf Duffer"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+		</div>
+	</div>
+
 	<br style="clear: left;" />
 </div>
 
