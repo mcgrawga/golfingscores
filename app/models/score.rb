@@ -119,9 +119,14 @@ class Score < ActiveRecord::Base
 	   			end
 			end
 
+			# All 18 blank or all 18 filled out or (front 9 and not back9) or (back9 and not front9)
 			if (putts_hole_1.blank? && putts_hole_2.blank? && putts_hole_3.blank? && putts_hole_4.blank? && putts_hole_5.blank? && putts_hole_6.blank? && putts_hole_7.blank? && putts_hole_8.blank? && putts_hole_9.blank? && putts_hole_10.blank? && putts_hole_11.blank? && putts_hole_12.blank? && putts_hole_13.blank? && putts_hole_14.blank? && putts_hole_15.blank? && putts_hole_16.blank? && putts_hole_17.blank? && putts_hole_18.blank?)
 				return
 			elsif (!putts_hole_1.blank? && !putts_hole_2.blank? && !putts_hole_3.blank? && !putts_hole_4.blank? && !putts_hole_5.blank? && !putts_hole_6.blank? && !putts_hole_7.blank? && !putts_hole_8.blank? && !putts_hole_9.blank? && !putts_hole_10.blank? && !putts_hole_11.blank? && !putts_hole_12.blank? && !putts_hole_13.blank? && !putts_hole_14.blank? && !putts_hole_15.blank? && !putts_hole_16.blank? && !putts_hole_17.blank? && !putts_hole_18.blank?)
+				return
+			elsif (!putts_hole_1.blank? && !putts_hole_2.blank? && !putts_hole_3.blank? && !putts_hole_4.blank? && !putts_hole_5.blank? && !putts_hole_6.blank? && !putts_hole_7.blank? && !putts_hole_8.blank? && !putts_hole_9.blank? && putts_hole_10.blank? && putts_hole_11.blank? && putts_hole_12.blank? && putts_hole_13.blank? && putts_hole_14.blank? && putts_hole_15.blank? && putts_hole_16.blank? && putts_hole_17.blank? && putts_hole_18.blank?)
+				return
+			elsif (putts_hole_1.blank? && putts_hole_2.blank? && putts_hole_3.blank? && putts_hole_4.blank? && putts_hole_5.blank? && putts_hole_6.blank? && putts_hole_7.blank? && putts_hole_8.blank? && putts_hole_9.blank? && !putts_hole_10.blank? && !putts_hole_11.blank? && !putts_hole_12.blank? && !putts_hole_13.blank? && !putts_hole_14.blank? && !putts_hole_15.blank? && !putts_hole_16.blank? && !putts_hole_17.blank? && !putts_hole_18.blank?)
 				return
 			else
 				errors.add(:base, "You must enter all putts or none.")
