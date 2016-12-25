@@ -4,6 +4,8 @@ gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.1.1'
 
+gem 'rails_12factor'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
