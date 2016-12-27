@@ -8,6 +8,8 @@ gem 'rails_12factor'
 
 ruby '2.2.1'
 
+gem 'puma'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
