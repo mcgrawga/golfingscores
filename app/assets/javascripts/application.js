@@ -366,7 +366,7 @@ ready = function() {
 	//  On the edit score page, unhide all the elements on the scorecard
 	//
 	var title = $(document).attr('title');
-	if (title == 'Statgolf Edit Score' || $(".errors").is(":visible"))
+	if (title == 'Golfingscores Edit Score' || $(".errors").is(":visible"))
 	{
 		$("#course_select_div").show();
 		$("#tee_select_div").show();
@@ -393,7 +393,7 @@ ready = function() {
 	//
 	//  On the edit tee page, hide back 9 if it is a 9 hole tee.
 	//
-	if (title == 'Statgolf Edit Tee')
+	if (title == 'Golfingscores Edit Tee')
 	{
 		// hide back 9 if it is only a 9 hole tee
     	if ($("#tee_par_hole_10").val() == "")
@@ -407,7 +407,7 @@ ready = function() {
 	//
 	//  On scores page, muck with some CSS so the handicap displays correctly.
 	//
-	if (title == 'Statgolf Scores')
+	if (title == 'Golfingscores Scores')
     	$(".page-header").attr("style", "width: 75%; float: left;");
 
 
@@ -415,7 +415,7 @@ ready = function() {
 	//
 	//  On the charts page, load the google charts stuff.
 	//
-	if (title == 'Statgolf Charts')
+	if (title == 'Golfingscores Charts')
 	{
 	    google.charts.load('current', { 'packages': ['corechart'] });
 	    google.charts.setOnLoadCallback(drawCharts);
