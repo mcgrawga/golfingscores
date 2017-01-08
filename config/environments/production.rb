@@ -1,7 +1,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.action_mailer.default_url_options = { :host => 'statgolf.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'www.golfingscores.com' }
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
@@ -12,7 +12,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
   address: "smtp.gmail.com",
   port: 587,
-  domain: "statgolf.herokuapp.com",
+  domain: "www.golfingscores.com",
   authentication: "plain",
   enable_starttls_auto: true,
   user_name: ENV['STATGOLF_SUPPORT_EMAIL'],
