@@ -13,11 +13,11 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
   address: "smtp.gmail.com",
   port: 587,
-  domain: "statgolf.herokuapp.com",
+  domain: "www.golfingscores.com",
   authentication: "plain",
   enable_starttls_auto: true,
-  user_name: ENV['STATGOLF_SUPPORT_EMAIL'],
-  password: ENV['STATGOLF_SUPPORT_EMAIL_PASSWORD']
+  user_name: ENV['SUPPORT_EMAIL'],
+  password: ENV['SUPPORT_EMAIL_PASSWORD']
 }
 
 

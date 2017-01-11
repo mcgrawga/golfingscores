@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       token = params[:stripeToken]
       begin
         # Create a Customer and a subsctiption
-        Stripe.api_key = ENV['SECRET_KEY']
+        Stripe.api_key = ENV['STRIPE_SECRET_KEY']
         customer = Stripe::Customer.create(
           :source => params[:stripeToken],
           :plan => params[:plan_name],

@@ -86,7 +86,7 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     #
     #  Register new user
     #
-    Stripe.api_key = ENV['SECRET_KEY']
+    Stripe.api_key = ENV['STRIPE_SECRET_KEY']
     token = Stripe::Token.create(
       :card => {
         :number => "4242424242424242",

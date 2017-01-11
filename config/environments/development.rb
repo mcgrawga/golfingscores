@@ -15,8 +15,8 @@ Rails.application.configure do
   domain: "www.golfingscores.com",
   authentication: "plain",
   enable_starttls_auto: true,
-  user_name: ENV['STATGOLF_SUPPORT_EMAIL'],
-  password: ENV['STATGOLF_SUPPORT_EMAIL_PASSWORD']
+  user_name: ENV['SUPPORT_EMAIL'],
+  password: ENV['SUPPORT_EMAIL_PASSWORD']
 }
 
   # In the development environment your application's code is reloaded on

@@ -6,14 +6,14 @@ class SettingsController < ApplicationController
 	end
 
 	def change_subscription
-		Stripe.api_key = ENV['SECRET_KEY']
+		Stripe.api_key = ENV['STRIPE_SECRET_KEY']
 		stripeCustomer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
 		subscription = Stripe::Subscription.retrieve(stripeCustomer.subscriptions.first.id)
 		@current_stripe_plan = subscription.plan.id
 	end
 
 	def do_change_subscription
-		Stripe.api_key = ENV['SECRET_KEY']
+		Stripe.api_key = ENV['STRIPE_SECRET_KEY']
 		stripeCustomer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
 		subscription = Stripe::Subscription.retrieve(stripeCustomer.subscriptions.first.id)
 		subscription.plan = params[:plan_name]
@@ -27,7 +27,7 @@ class SettingsController < ApplicationController
 	end
 
 	def do_cancel_subscription
-		Stripe.api_key = ENV['SECRET_KEY']
+		Stripe.api_key = ENV['STRIPE_SECRET_KEY']
 		stripeCustomer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
 		subscription = Stripe::Subscription.retrieve(stripeCustomer.subscriptions.first.id)
 		subscription.delete
@@ -41,7 +41,7 @@ class SettingsController < ApplicationController
 	def do_renew_subscription
 		token = params[:stripeToken]
         # Create a Customer and a subsctiption
-        Stripe.api_key = ENV['SECRET_KEY']
+        Stripe.api_key = ENV['STRIPE_SECRET_KEY']
         customer = Stripe::Customer.create(
           :source => params[:stripeToken],
           :plan => current_user.stripe_plan,
