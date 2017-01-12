@@ -43,6 +43,12 @@
 	width: 500px;
 	height: 300px;	
 }
+#penalties_per_nine_chart{
+	/*border-style: solid;
+	border-color: red;*/
+	width: 1000px;
+	height: 300px;	
+}
 .tool_tip{
 /*	border-style: solid;
 	border-color: red;*/
