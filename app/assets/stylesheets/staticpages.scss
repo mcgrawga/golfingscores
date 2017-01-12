@@ -29,10 +29,10 @@
 .plan_header {
 	background-color: lightblue;
 	width: 300px;
-	height: 75px;
+	height: 85px;
 	border-style: solid solid none;
 	border-width: 2px;
-	border-color: gray;
+	border-color: lightgray;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
 	text-align: center;
@@ -44,10 +44,39 @@
 	height: 500px;
 	border-style: none solid solid solid;
 	border-width: 2px;
-	border-color: gray;
+	border-color: lightgray;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
 	text-align: center;
+}
+
+.popular_plan_header {
+	background-color: lightblue;
+	width: 350px;
+	height: 135px;
+	border-style: solid solid none;
+	border-width: 2px;
+	border-color: lightgray;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	text-align: center;
+}
+
+
+.popular_plan_content {
+	width: 350px;
+	height: 500px;
+	border-style: none solid solid solid;
+	border-width: 2px;
+	border-color: lightgray;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	text-align: center;
+}
+
+.pop_subscription{
+	color: white;
+	font-size: 2em;
 }
 
 .plan_features{
@@ -61,6 +90,11 @@
 
 
 .plan_header > h3 {
+	color: white;
+	font-size: 3em;
+}
+
+.popular_plan_header > h3 {
 	color: white;
 	font-size: 3em;
 }

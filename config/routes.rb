@@ -12,8 +12,10 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'staticpages#indexb'
-  get 'indexb' => 'staticpages#index'
+  root 'staticpages#index'
+  get 'index' => 'staticpages#index'
+  get 'indexb' => 'staticpages#indexb'
+  get 'indexc' => 'staticpages#indexc'
   get 'about' => 'staticpages#about'
   get 'notauthorized' => 'staticpages#notauthorized'
 

@@ -26,28 +26,17 @@
 				<div class="feature_line">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Current handicap</span>
 				</div>
-				<div class="feature_line">
-					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Putts per green</span>
-				</div>
-				<div class="feature_line">
-					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Penalties per round</span>
-				</div>
-				<div class="feature_line">
-					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Fairways hit</span>
-				</div>
-				<div class="feature_line">
-					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Greens in regulation</span>
-				</div>
 			</div>
 			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Golfingscores Amateur"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
 		</div>
 	</div>
 
 	<div class="plan" id="Club_Plan">
-		<div class="plan_header">
+		<div class="popular_plan_header">
 			<h3>Club</h3>
+			<span class="pop_subscription">Most Popular!</span>
 		</div>
-		<div class="plan_content">
+		<div class="popular_plan_content">
 			<div class="plan_top">
 				<div class="plan_price">$7</div>
 				<div class="per_year">per month</div>
@@ -64,12 +53,6 @@
 				</div>
 				<div class="feature_line">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Penalties per round</span>
-				</div>
-				<div class="feature_line">
-					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Fairways hit</span>
-				</div>
-				<div class="feature_line">
-					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Greens in regulation</span>
 				</div>
 			</div>
 			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Golfingscores Club"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>

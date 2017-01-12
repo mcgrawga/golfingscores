@@ -3,6 +3,8 @@ class StaticpagesController < ApplicationController
   end
   def indexb
   end
+  def indexc
+  end
   def about
   end
   def notauthorized
