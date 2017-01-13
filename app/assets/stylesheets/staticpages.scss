@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.about_p{
+	font-size: 1.5em;
+	margin: 40px;
+}
+
 #sign_up_button {
 	margin-top: 50px;
 	margin-bottom: 25px;
@@ -19,10 +24,13 @@
 #plans {
 	margin-right: 25px;
 	margin-bottom: 25px;
+	margin-top: 25px;
 }
 
 .plan{
-	float: left;
+	//float: left;
+	display: inline-block;
+	vertical-align: middle;
 }
 
 
@@ -32,7 +40,7 @@
 	height: 85px;
 	border-style: solid solid none;
 	border-width: 2px;
-	border-color: lightgray;
+	border-color: gray;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
 	text-align: center;
@@ -44,10 +52,11 @@
 	height: 500px;
 	border-style: none solid solid solid;
 	border-width: 2px;
-	border-color: lightgray;
+	border-color: gray;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
 	text-align: center;
+	position: relative;
 }
 
 .popular_plan_header {
@@ -56,7 +65,7 @@
 	height: 135px;
 	border-style: solid solid none;
 	border-width: 2px;
-	border-color: lightgray;
+	border-color: gray;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
 	text-align: center;
@@ -68,7 +77,7 @@
 	height: 500px;
 	border-style: none solid solid solid;
 	border-width: 2px;
-	border-color: lightgray;
+	border-color: gray;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
 	text-align: center;
@@ -82,6 +91,11 @@
 .plan_features{
 	text-align: left;	
 	margin-left: 15px;
+}
+
+.popular_plan_features{
+	text-align: left;	
+	margin-left: 35px;
 }
 
 .plan_details {
@@ -106,17 +120,17 @@
 
 #Amateur_Plan {
 	margin-right: 50px;
-	margin-top: 50px;
+//	margin-top: 50px;
 }
 
 #Club_Plan {
 	margin-right: 50px;
-	margin-top: 50px;
+//	margin-top: 50px;
 }
 
 #Pro_Plan {
 	margin-right: 50px;
-	margin-top: 50px;
+//	margin-top: 50px;
 }
 
 .per_year {
