@@ -26,7 +26,7 @@
   ga('create', 'UA-12551082-7', 'auto');
   ga('send', 'pageview');
 
-</script>:
+</script>
 
 var ready;
 ready = function() {
