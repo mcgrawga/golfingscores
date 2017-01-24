@@ -7,20 +7,33 @@
 <div class="clear_float"></div>
 
 
-<%= link_to 'Add a Score', new_score_path, class: "add_course_link" %>
+<% if !@scores.empty? %>
+	<%= link_to 'Add a Score', new_score_path, class: "add_course_link" %>
+<% end %>
 <div class="clear_float"></div>
 
-
-
-<table class="table table-striped"> 
-	<tbody> 
-		<% @scores.each do |score| %>
-			<tr>
-				<!-- <td><%= score.date_played.strftime("%b %d, %Y") %></td> -->
-				<td><%= "%s %s, %s" % [score.date_played.strftime("%b"), score.date_played.day.ordinalize, score.date_played.year] %></td>
-				<td><%= score.tee.course.name %> <small>(<%= score.tee.name %>)</small></td> 
-				<td><%= link_to score.total, edit_score_path(score.id) %></td> 
-			</tr>
-		<% end %>
-	</tbody> 
-</table>
+<% if @scores.empty? %>
+	<p class="welcome_message">
+		Welcome to golfingscores.com
+	</p>
+	<p class="call_to_enter_course">
+		Before you can enter scores, you need to <%= link_to 'add the courses', new_course_path %> you play.
+	</p>
+	<p class="call_to_enter_course">
+		If you have already added a course, go ahead and <%= link_to 'enter your first score', new_score_path %>.
+	</p>
+	
+<% else %>
+	<table class="table table-striped"> 
+		<tbody> 
+			<% @scores.each do |score| %>
+				<tr>
+					<!-- <td><%= score.date_played.strftime("%b %d, %Y") %></td> -->
+					<td><%= "%s %s, %s" % [score.date_played.strftime("%b"), score.date_played.day.ordinalize, score.date_played.year] %></td>
+					<td><%= score.tee.course.name %> <small>(<%= score.tee.name %>)</small></td> 
+					<td><%= link_to score.total, edit_score_path(score.id) %></td> 
+				</tr>
+			<% end %>
+		</tbody> 
+	</table>
+<% end %>

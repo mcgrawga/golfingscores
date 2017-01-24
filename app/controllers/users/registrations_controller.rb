@@ -5,6 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
    def new
       @plan_name = params[:plan_name]
+      @landing_page = params[:landing_page]
       super
    end
 
@@ -23,7 +24,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
         )
         # Add stripe token to customer in database
         resource.stripe_customer_id = customer.id
+        #Record the plan name
         resource.stripe_plan = params[:plan_name]
+        #Record the landing page the user subscribed from
+        resource.landing_page = params[:landing_page]
         resource.save
       rescue => e
         resource.destroy
