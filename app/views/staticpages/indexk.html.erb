@@ -1,0 +1,142 @@
+<%content_for :page_header do%>Golfingscores.com<%end%>
+<ul class="homepage_list">
+	<li>Record all your golf scores forever.</li>
+	<li>Know your handicap.</li>
+	<li>Record putts, fairways, penalties, greens in regulation.</li>
+	<li>Use interactive graphs to improve your game.</li>
+	<li>Free 30 day trial.</li>
+</ul>
+
+
+
+<div id="plans">
+	<div class="plan" id="Amateur_Plan">
+		<div class="plan_header">
+			<h3>Amateur</h3>
+		</div>
+		<div class="plan_content">
+			<div class="plan_top">
+				<div class="plan_price">$7</div>
+				<div class="per_year">per year</div>
+			</div>
+			<div class="plan_features">
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Unlimited scores</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Current handicap</span>
+				</div>
+			</div>
+			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Golfingscores Amateur Yearly Minus 10", :landing_page => "indexk"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+		</div>
+	</div>
+
+	<div class="plan" id="Club_Plan">
+		<div class="plan_header">
+			<h3>Club</h3>
+		</div>
+		<div class="plan_content">
+			<div class="plan_top">
+				<div class="plan_price">$11</div>
+				<div class="per_year">per year</div>
+			</div>
+			<div class="plan_features">
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Unlimited scores</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Current handicap</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Putts per green</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Penalties per round</span>
+				</div>
+			</div>
+			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Golfingscores Club Yearly Minus 10", :landing_page => "indexk"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+		</div>
+	</div>
+
+	<div class="plan" id="Pro_Plan">
+		<div class="plan_header">
+			<h3>Pro</h3>
+		</div>
+		<div class="plan_content">
+			<div class="plan_top">
+				<div class="plan_price">$15</div>
+				<div class="per_year">per year</div>
+			</div>
+			<div class="plan_features">
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Unlimited scores</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Current handicap</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Putts per green</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Penalties per round</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Fairways hit</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Greens in regulation</span>
+				</div>
+			</div>
+			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Golfingscores Pro Yearly Minus 10", :landing_page => "indexk"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+		</div>
+	</div>
+
+	<br style="clear: left;" />
+</div>
+
+<h2 class="landing_page_image_headline">All your scores and current handicap</h2>
+<div class="landing_page_image_border">
+	<div class="landing_page_image">
+		<%= image_tag("scores") %>
+	</div>
+</div>
+
+<h2 class="landing_page_image_headline">Score history</h2>
+<div class="landing_page_image_border">
+	<div class="landing_page_image">
+		<%= image_tag("score_history") %>
+	</div>
+</div>
+
+<h2 class="landing_page_image_headline">Penalties</h2>
+<div class="landing_page_image_border">
+	<div class="landing_page_image">
+		<%= image_tag("penalties") %>
+	</div>
+</div>
+
+<h2 class="landing_page_image_headline">Scorecard</h2>
+<div class="landing_page_image_border">
+	<div class="landing_page_image">
+		<%= image_tag("scorecard") %>
+	</div>
+</div>
+
+<h2 class="landing_page_image_headline">Putts</h2>
+<div class="landing_page_image_border">
+	<div class="landing_page_image">
+		<%= image_tag("putts") %>
+	</div>
+</div>
+
+<h2 class="landing_page_image_headline">Pie charts! <small>Mmm, pie...</small></h2>
+<div class="landing_page_image_border">
+	<div class="landing_page_image">
+		<%= image_tag("pie_charts") %>
+	</div>
+</div>
+
+
+
+
+
