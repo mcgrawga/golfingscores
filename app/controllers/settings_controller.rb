@@ -10,6 +10,47 @@ class SettingsController < ApplicationController
 		stripeCustomer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
 		subscription = Stripe::Subscription.retrieve(stripeCustomer.subscriptions.first.id)
 		@current_stripe_plan = subscription.plan.id
+		@low_stripe_plan = ""
+		@medium_stripe_plan = ""
+		@high_stripe_plan = ""
+		@low_stripe_plan_price = ""
+		@medium_stripe_plan_price = ""
+		@high_stripe_plan_price = ""
+		@month_or_year = ""
+		if (@current_stripe_plan == "Golfingscores Amateur" || @current_stripe_plan == "Golfingscores Club" || @current_stripe_plan == "Golfingscores Pro")
+			@low_stripe_plan = "Golfingscores Amateur"
+			@medium_stripe_plan = "Golfingscores Club"
+			@high_stripe_plan = "Golfingscores Pro"
+			@low_stripe_plan_price = "5"
+			@medium_stripe_plan_price = "7"
+			@high_stripe_plan_price = "9"
+			@month_or_year = "month"
+		elsif (@current_stripe_plan == "Golfingscores Amateur Minus 4" || @current_stripe_plan == "Golfingscores Club Minus 4" || @current_stripe_plan == "Golfingscores Pro Minus 4")
+			@low_stripe_plan = "Golfingscores Amateur Minus 4"
+			@medium_stripe_plan = "Golfingscores Club Minus 4"
+			@high_stripe_plan = "Golfingscores Pro Minus 4"
+			@low_stripe_plan_price = "1"
+			@medium_stripe_plan_price = "3"
+			@high_stripe_plan_price = "5"
+			@month_or_year = "month"
+		elsif (@current_stripe_plan == "Golfingscores Amateur Yearly" || @current_stripe_plan == "Golfingscores Club Yearly" || @current_stripe_plan == "Golfingscores Pro Yearly")
+			@low_stripe_plan = "Golfingscores Amateur Yearly"
+			@medium_stripe_plan = "Golfingscores Club Yearly"
+			@high_stripe_plan = "Golfingscores Pro Yearly"
+			@low_stripe_plan_price = "17"
+			@medium_stripe_plan_price = "21"
+			@high_stripe_plan_price = "25"
+			@month_or_year = "year"
+		elsif (@current_stripe_plan == "Golfingscores Amateur Yearly Minus 10" || @current_stripe_plan == "Golfingscores Club Yearly Minus 10" || @current_stripe_plan == "Golfingscores Pro Yearly Minus 10")
+			@low_stripe_plan = "Golfingscores Amateur Yearly"
+			@medium_stripe_plan = "Golfingscores Club Yearly"
+			@high_stripe_plan = "Golfingscores Pro Yearly"
+			@low_stripe_plan_price = "7"
+			@medium_stripe_plan_price = "11"
+			@high_stripe_plan_price = "15"
+			@month_or_year = "year"
+		end
+		log(@current_stripe_plan)
 	end
 
 	def do_change_subscription

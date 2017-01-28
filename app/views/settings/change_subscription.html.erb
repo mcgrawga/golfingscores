@@ -12,8 +12,8 @@
 		</div>
 		<div class="plan_content">
 			<div class="plan_top">
-				<div class="plan_price">$5</div>
-				<div class="per_year">per month</div>
+				<div class="plan_price">$<%= @low_stripe_plan_price %></div>
+				<div class="per_year">per <%= @month_or_year %></div>
 			</div>
 			<div class="plan_features">
 				<div class="feature_line">
@@ -23,12 +23,10 @@
 					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Current handicap</span>
 				</div>
 			</div>
-			<% if @current_stripe_plan == 'Golfingscores Amateur' %>
+			<% if @current_stripe_plan.include? "Amateur" %>
 				<div class="current_plan">This is your current plan</div>
-			<% elsif @current_stripe_plan == 'Golfingscores Club' %>
-				<%= button_to "Downgrade to Amateur", settings_change_subscription_path(:plan_name => "Golfingscores Amateur"), class: "btn btn-primary btn-lg", id: "change_subscription_button", role: "button" %>
-			<% elsif @current_stripe_plan == 'Golfingscores Pro' %>
-				<%= button_to "Downgrade to Amateur", settings_change_subscription_path(:plan_name => "Golfingscores Amateur"), class: "btn btn-primary btn-lg", id: "change_subscription_button", role: "button" %>
+			<% else %>
+				<%= button_to "Downgrade to Amateur", settings_change_subscription_path(:plan_name => @low_stripe_plan), class: "btn btn-primary btn-lg", id: "change_subscription_button", role: "button" %>
 			<% end %>
 		</div>
 	</div>
@@ -39,8 +37,8 @@
 		</div>
 		<div class="plan_content">
 			<div class="plan_top">
-				<div class="plan_price">$7</div>
-				<div class="per_year">per month</div>
+				<div class="plan_price">$<%= @medium_stripe_plan_price %></div>
+				<div class="per_year">per <%= @month_or_year %></div>
 			</div>
 			<div class="plan_features">
 				<div class="feature_line">
@@ -56,12 +54,12 @@
 					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Penalties per round</span>
 				</div>
 			</div>
-			<% if @current_stripe_plan == 'Golfingscores Amateur' %>
-				<%= button_to "Upgrade to Club", settings_change_subscription_path(:plan_name => "Golfingscores Club"), class: "btn btn-primary btn-lg", id: "change_subscription_button", role: "button" %>
-			<% elsif @current_stripe_plan == 'Golfingscores Club' %>
+			<% if @current_stripe_plan.include? "Amateur" %>
+				<%= button_to "Upgrade to Club", settings_change_subscription_path(:plan_name => @medium_stripe_plan), class: "btn btn-primary btn-lg", id: "change_subscription_button", role: "button" %>
+			<% elsif @current_stripe_plan.include? "Club" %>
 				<div class="current_plan">This is your current plan</div>
-			<% elsif @current_stripe_plan == 'Golfingscores Pro' %>
-				<%= button_to "Downgrade to Club", settings_change_subscription_path(:plan_name => "Golfingscores Club"), class: "btn btn-primary btn-lg", id: "change_subscription_button", role: "button" %>
+			<% else %>
+				<%= button_to "Downgrade to Club", settings_change_subscription_path(:plan_name => @medium_stripe_plan), class: "btn btn-primary btn-lg", id: "change_subscription_button", role: "button" %>
 			<% end %>
 		</div>
 	</div>
@@ -72,8 +70,8 @@
 		</div>
 		<div class="plan_content">
 			<div class="plan_top">
-				<div class="plan_price">$9</div>
-				<div class="per_year">per month</div>
+				<div class="plan_price">$<%= @high_stripe_plan_price %></div>
+				<div class="per_year">per <%= @month_or_year %></div>
 			</div>
 			<div class="plan_features">
 				<div class="feature_line">
@@ -95,12 +93,10 @@
 					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Greens in regulation</span>
 				</div>
 			</div>
-			<% if @current_stripe_plan == 'Golfingscores Amateur' %>
-				<%= button_to "Upgrade to Pro", settings_change_subscription_path(:plan_name => "Golfingscores Pro"), class: "btn btn-primary btn-lg", id: "change_subscription_button", role: "button" %>
-			<% elsif @current_stripe_plan == 'Golfingscores Club' %>
-				<%= button_to "Upgrade to Pro", settings_change_subscription_path(:plan_name => "Golfingscores Pro"), class: "btn btn-primary btn-lg", id: "change_subscription_button", role: "button" %>
-			<% elsif @current_stripe_plan == 'Golfingscores Pro' %>
+			<% if @current_stripe_plan.include? "Pro" %>
 				<div class="current_plan">This is your current plan</div>
+			<% else %>
+				<%= button_to "Upgrade to Pro", settings_change_subscription_path(:plan_name => @high_stripe_plan), class: "btn btn-primary btn-lg", id: "change_subscription_button", role: "button" %>
 			<% end %>
 		</div>
 	</div>

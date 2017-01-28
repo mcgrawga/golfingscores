@@ -6,40 +6,40 @@ class StaticpagesController < ApplicationController
     	num = rand(1..12)
     	log(num.to_s)
     	if num == 1
-        cookies[:golfingscores_landing_page] = "index"
+        cookies.permanent[:golfingscores_landing_page] = "index"
     		render :index
     	elsif num == 2
-        cookies[:golfingscores_landing_page] = "indexb"
+        cookies.permanent[:golfingscores_landing_page] = "indexb"
     		render :indexb
       elsif num == 3
-        cookies[:golfingscores_landing_page] = "indexc"
+        cookies.permanent[:golfingscores_landing_page] = "indexc"
         render :indexc
       elsif num == 4
-        cookies[:golfingscores_landing_page] = "indexd"
+        cookies.permanent[:golfingscores_landing_page] = "indexd"
         render :indexd
       elsif num == 5
-        cookies[:golfingscores_landing_page] = "indexe"
+        cookies.permanent[:golfingscores_landing_page] = "indexe"
         render :indexe
       elsif num == 6
-        cookies[:golfingscores_landing_page] = "indexf"
+        cookies.permanent[:golfingscores_landing_page] = "indexf"
         render :indexf
       elsif num == 7
-        cookies[:golfingscores_landing_page] = "indexg"
+        cookies.permanent[:golfingscores_landing_page] = "indexg"
         render :indexg
       elsif num == 8
-        cookies[:golfingscores_landing_page] = "indexh"
+        cookies.permanent[:golfingscores_landing_page] = "indexh"
         render :indexh
       elsif num == 9
-        cookies[:golfingscores_landing_page] = "indexi"
+        cookies.permanent[:golfingscores_landing_page] = "indexi"
         render :indexi
       elsif num == 10
-        cookies[:golfingscores_landing_page] = "indexj"
+        cookies.permanent[:golfingscores_landing_page] = "indexj"
         render :indexj
       elsif num == 11
-        cookies[:golfingscores_landing_page] = "indexk"
+        cookies.permanent[:golfingscores_landing_page] = "indexk"
         render :indexk
     	else
-        cookies[:golfingscores_landing_page] = "indexl"
+        cookies.permanent[:golfingscores_landing_page] = "indexl"
     		render :indexl
     	end
     else
