@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="<%= yield :page_description %>">
   <title>Golfingscores <%= yield :page_title %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag "https://js.stripe.com/v2/", "application" => true %>
@@ -52,7 +53,7 @@
         &copy; <%= Time.now.year %> <a href="https://www.golfingscores.com">www.golfingscores.com</a> all rights reserved.
       </div>
       <div class="footer_content float_right text-muted">
-        Contact: <a href="mailto:garthmcgraw@golfingscores.com">support@golfingscores.com</a>
+        Contact: <a href="mailto:support@golfingscores.com">support@golfingscores.com</a>
       </div>
     </div>
 
