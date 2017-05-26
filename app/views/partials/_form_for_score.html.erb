@@ -439,7 +439,7 @@
 
 	</table>
 	
-	
+	<input type="hidden" id="handicap" value="<%=@handicap%>">
 	<%= f.submit class: "btn btn-primary", id: "create_score_button"%>
 	<% if !@score.id.blank? %>
 		<%= link_to 'Delete Score', score_path(@score), method: :delete, class: "delete_score_link" %>

@@ -149,12 +149,11 @@ ready = function() {
 			else
 				holeNum = inputId.slice(-2);
 			var par = $("#par_hole_" + holeNum).html();
-			var courseHandicap = 9;
 			var nextHole = parseInt(holeNum) + 1;
 			var score = $(this).val();
 			if (score == 1)
 				return;
-			var escScore = GetESCScore(courseHandicap, par);
+			var escScore = GetESCScore($("#handicap").attr("value"), par);
 			if (score > escScore)
 				score = escScore;
 			$(this).val(score);
@@ -264,13 +263,13 @@ ready = function() {
 
 	function GetESCScore(courseHandicap, par)
 	{
-		if (courseHandicap <= 9)
+		if (courseHandicap >= -9)
 			return (parseInt(par) + 2);
-		else if (courseHandicap <= 19)
+		else if (courseHandicap >= -19)
 			return 7;
-		else if (courseHandicap <= 29)
+		else if (courseHandicap >= -29)
 			return 8;
-		else if (courseHandicap <= 39)
+		else if (courseHandicap >= -39)
 			return 9;
 		else 
 			return 10;

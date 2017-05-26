@@ -2,8 +2,27 @@ class ScoresController < ApplicationController
 	before_filter :check_for_login
 	before_filter :check_for_subscription
 
+	def getHandicap
+		scores = Score.joins("INNER JOIN tees ON tees.id = scores.tee_id INNER JOIN courses ON courses.id = tees.course_id and courses.user_id = %s" % current_user.id.to_s).order(date_played: :desc)
+		scoreSum = 0
+		handicap = 'N/A'
+		scores.each do |s|
+			if (s.nine_or_eighteen_hole_score == 9)
+				scoreSum = scoreSum + (s.total * 2)
+			else
+				scoreSum = scoreSum + s.total
+			end
+		end
+		if (scores.length > 0)
+			avgScore = scoreSum / scores.length
+			handicap = ((avgScore - 72) * 0.96 * -1).round(1) 
+		end
+		return handicap
+	end
+
 	def index
 		@scores = Score.joins("INNER JOIN tees ON tees.id = scores.tee_id INNER JOIN courses ON courses.id = tees.course_id and courses.user_id = %s" % current_user.id.to_s).order(date_played: :desc)
+		@score_ids_used_in_handicap_calc = GetScoresUsedInHandicap(@scores)
 		log("Userid:  %s" %  current_user.id.to_s)
 		scoreSum = 0
 		@scores.each do |s|
@@ -19,11 +38,65 @@ class ScoresController < ApplicationController
 		else
 			@handicap = 'N/A' 
 		end
+		@handicap = getHandicap
+	end
+
+
+	class Scr
+	  attr_accessor :id, :score
+	  def initialize(id, score)
+	    @id = id
+	    @score = score
+	  end
+	end
+
+
+
+	def GetScoresUsedInHandicap(scores)
+		scoreArray = Array.new
+		log("Scores.count:  %s" %  scores.count)
+		scores.each do |s|
+			if (s.nine_or_eighteen_hole_score == 9)
+				scoreArray.push Scr.new(s.id, (s.total*2))
+			else
+				scoreArray.push Scr.new(s.id, s.total)
+			end			
+		end
+		sortedArray = scoreArray.sort{|s1,s2| s1.score <=> s2.score}
+		idArray = Array.new
+		sortedArray.each do |s|
+			idArray.push(s.id)
+		end
+		log("idArray.inspect:  %s" %  idArray.inspect)
+		if (scores.length <= 4)
+			return Array.new
+		elsif (scores.length <= 6)
+			return idArray.take(1)
+		elsif (scores.length <= 8)
+			return idArray.take(2)
+		elsif (scores.length <= 10)
+			return idArray.take(3)
+		elsif (scores.length <= 12)
+			return idArray.take(4)
+		elsif (scores.length <= 14)
+			return idArray.take(5)
+		elsif (scores.length <= 16)
+			return idArray.take(6)
+		elsif (scores.length <= 17)
+			return idArray.take(7)
+		elsif (scores.length <= 18)
+			return idArray.take(8)
+		elsif (scores.length <= 19)
+			return idArray.take(9)
+		else 
+			return idArray.take(10)
+		end
 	end
 
 	def new
 		@score = Score.new
 		@courses = Course.where("user_id = ?", current_user.id).order("name ASC")
+		@handicap = getHandicap
 	end
 
 	def create
@@ -42,6 +115,7 @@ class ScoresController < ApplicationController
 
 	def edit
 		@score = Score.find(params[:id])
+		@handicap = getHandicap
 		if (@score.tee.course.user_id == current_user.id)
 			@courses = Course.where("user_id = ?", current_user.id).order("name ASC")
 		else
