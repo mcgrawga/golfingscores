@@ -55,7 +55,7 @@ class ScoresController < ApplicationController
 	def GetScoresUsedInHandicap(scores)
 		scoreArray = Array.new
 		log("Scores.count:  %s" %  scores.count)
-		scores.each do |s|
+		scores.take(20).each do |s|
 			if (s.nine_or_eighteen_hole_score == 9)
 				scoreArray.push Scr.new(s.id, (s.total*2))
 			else

@@ -29,6 +29,7 @@
 		<tbody> 
 			<% @scores.each_with_index do |score, i| %>
 				<tr>
+					<td><%= i+1 %></td>
 					<td><%= "%s %s, %s" % [score.date_played.strftime("%b"), score.date_played.day.ordinalize, score.date_played.year] %></td>
 					<td><%= score.tee.course.name %> <small>(<%= score.tee.name %>)</small></td> 
 					<% if (@score_ids_used_in_handicap_calc.include? score.id) %>
@@ -36,14 +37,6 @@
 					<%else%>
 						<td><%= link_to score.total, edit_score_path(score.id) %></td> 
 					<%end%>
-				</tr>
-			<% end %>
-			<% @scores.each do |score| %>
-				<tr>
-					<!-- <td><%= score.date_played.strftime("%b %d, %Y") %></td> -->
-					<td><%= "%s %s, %s" % [score.date_played.strftime("%b"), score.date_played.day.ordinalize, score.date_played.year] %></td>
-					<td><%= score.tee.course.name %> <small>(<%= score.tee.name %>)</small></td> 
-					<td><%= link_to score.total, edit_score_path(score.id) %></td> 
 				</tr>
 			<% end %>
 		</tbody> 
