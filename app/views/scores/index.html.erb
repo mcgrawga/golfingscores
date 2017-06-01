@@ -33,7 +33,7 @@
 					<td><%= "%s %s, %s" % [score.date_played.strftime("%b"), score.date_played.day.ordinalize, score.date_played.year] %></td>
 					<td><%= score.tee.course.name %> <small>(<%= score.tee.name %>)</small></td> 
 					<% if (@score_ids_used_in_handicap_calc.include? score.id) %>
-						<td><%= link_to score.total.to_s + " *", edit_score_path(score.id), class: "handicap_score" %></td> 
+						<td><%= link_to score.total.to_s, edit_score_path(score.id), class: "handicap_score", title: "A red score indicates it was used to calculate your handicap." %></td> 
 					<%else%>
 						<td><%= link_to score.total, edit_score_path(score.id) %></td> 
 					<%end%>
