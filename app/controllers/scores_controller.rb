@@ -13,7 +13,7 @@ class ScoresController < ApplicationController
 				scoreSum = scoreSum + s.total
 			end
 		end
-		if (scores.length > 0)
+		if (scores.length > 5)
 			avgScore = scoreSum / scores.length
 			handicap = ((avgScore - 72) * 0.96 * -1).round(1) 
 		end
