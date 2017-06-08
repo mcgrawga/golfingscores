@@ -18,8 +18,8 @@
 		</div>
 		<div class="plan_content">
 			<div class="plan_top">
-				<div class="plan_price">$5</div>
-				<div class="per_year">per month</div>
+				<div class="plan_price">$1</div>
+				<div class="per_year">per year</div>
 			</div>
 			<div class="plan_features">
 				<div class="feature_line">
@@ -28,22 +28,33 @@
 				<div class="feature_line">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Current handicap</span>
 				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Putts per green</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Penalties per round</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Fairways hit</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Greens in regulation</span>
+				</div>
 			</div>
-			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Golfingscores Amateur", :landing_page => "indexc"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Golfingscores Amateur Yearly 1", :landing_page => "indexa"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
 		</div>
 	</div>
 
 	<div class="plan" id="Club_Plan">
-		<div class="popular_plan_header">
+		<div class="plan_header">
 			<h3>Club</h3>
-			<span class="pop_subscription">Most Popular!</span>
 		</div>
-		<div class="popular_plan_content">
+		<div class="plan_content">
 			<div class="plan_top">
-				<div class="plan_price">$7</div>
-				<div class="per_year">per month</div>
+				<div class="plan_price">$3</div>
+				<div class="per_year">per year</div>
 			</div>
-			<div class="popular_plan_features">
+			<div class="plan_features">
 				<div class="feature_line">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Unlimited scores</span>
 				</div>
@@ -56,8 +67,14 @@
 				<div class="feature_line">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Penalties per round</span>
 				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Fairways hit</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Greens in regulation</span>
+				</div>
 			</div>
-			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Golfingscores Club", :landing_page => "indexc"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Golfingscores Club Yearly 3", :landing_page => "indexa"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
 		</div>
 	</div>
 
@@ -67,8 +84,8 @@
 		</div>
 		<div class="plan_content">
 			<div class="plan_top">
-				<div class="plan_price">$9</div>
-				<div class="per_year">per month</div>
+				<div class="plan_price">$5</div>
+				<div class="per_year">per year</div>
 			</div>
 			<div class="plan_features">
 				<div class="feature_line">
@@ -90,7 +107,7 @@
 					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Greens in regulation</span>
 				</div>
 			</div>
-			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Golfingscores Pro", :landing_page => "indexc"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
+			<%= link_to "Sign up", new_user_registration_path(:plan_name => "Golfingscores Pro Yearly 5", :landing_page => "indexa"), class: "btn btn-primary btn-lg", id: "sign_up_button", role: "button" %>
 		</div>
 	</div>
 

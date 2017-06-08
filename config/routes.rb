@@ -14,17 +14,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'staticpages#index'
   get 'index' => 'staticpages#index'
+  get 'indexa' => 'staticpages#indexa'
   get 'indexb' => 'staticpages#indexb'
-  get 'indexc' => 'staticpages#indexc'
-  get 'indexd' => 'staticpages#indexd'
-  get 'indexe' => 'staticpages#indexe'
-  get 'indexf' => 'staticpages#indexf'
-  get 'indexg' => 'staticpages#indexg'
-  get 'indexh' => 'staticpages#indexh'
-  get 'indexi' => 'staticpages#indexi'
-  get 'indexj' => 'staticpages#indexj'
-  get 'indexk' => 'staticpages#indexk'
-  get 'indexl' => 'staticpages#indexl'
   get 'about' => 'staticpages#about'
   get 'notauthorized' => 'staticpages#notauthorized'
 
