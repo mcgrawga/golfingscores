@@ -22,6 +22,18 @@
 				<div class="feature_line">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Current handicap</span>
 				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Putts per green</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Penalties per round</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Fairways hit</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Greens in regulation</span>
+				</div>
 			</div>
 			<% if @current_stripe_plan.include? "Amateur" %>
 				<div class="current_plan">This is your current plan</div>
@@ -52,6 +64,12 @@
 				</div>
 				<div class="feature_line">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: limegreen;"></span><span class="included_feature">Penalties per round</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Fairways hit</span>
+				</div>
+				<div class="feature_line">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: gray;"></span><span class="not_included_feature">Greens in regulation</span>
 				</div>
 			</div>
 			<% if @current_stripe_plan.include? "Amateur" %>
