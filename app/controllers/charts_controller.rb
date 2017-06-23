@@ -160,9 +160,9 @@ class ChartsController < ApplicationController
 			if (!s.greens_in_regulation.blank?)
 				@GreensInRegulation.greensInRegulation = @GreensInRegulation.greensInRegulation + s.greens_in_regulation
 				if (s.nine_or_eighteen_hole_score == 18)
-					@GreensInRegulation.greensNotInRegulation = (18 - s.greens_in_regulation)
+					@GreensInRegulation.greensNotInRegulation = @GreensInRegulation.greensNotInRegulation + (18 - s.greens_in_regulation)
 				elsif (s.nine_or_eighteen_hole_score == 9)
-					@GreensInRegulation.greensNotInRegulation = (9 - s.greens_in_regulation)
+					@GreensInRegulation.greensNotInRegulation = @GreensInRegulation.greensNotInRegulation + (9 - s.greens_in_regulation)
 				end
 			end
 		end
