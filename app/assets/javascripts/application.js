@@ -501,6 +501,10 @@ function drawScoreHistoryChart(historyType)  // 9 or 18 holes
 		        // Add our selection handler.
 		        google.visualization.events.addListener(scoreHistoryChart, 'select', selectHandler);
 	        }
+	        else
+	        {
+	        	$('#score_history_chart_' + historyType + '_hole').hide();
+	        }
 	    }        
 	});
 }
