@@ -11,6 +11,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
+    @plan_name = params[:plan_name]
+    @landing_page = params[:landing_page]
     super
     if resource.save
       token = params[:stripeToken]
