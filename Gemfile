@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'devise'
-gem 'bootstrap-sass', '~> 3.1.1'
+gem 'bootstrap-sass', '~> 3.4.1'
 
 gem 'rails_12factor'
 
